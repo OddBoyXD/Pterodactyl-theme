@@ -35,14 +35,14 @@ A professional, modern, and responsive left-sidebar theme layout for Pterodactyl
 Run the following one-line automated installation command as **root** on your panel VPS:
 
 ```bash
-curl -s -L https://raw.githubusercontent.com/OddBoyXdxd69/Pterodactyl-theme/main/install.sh | sudo bash
+curl -s -L https://raw.githubusercontent.com/OddBoyXD/Pterodactyl-theme/main/install.sh | sudo bash
 ```
 
 Alternatively, you can download and run the script manually:
 
 ```bash
 # 1. Download the installation script
-curl -s -L https://raw.githubusercontent.com/OddBoyXdxd69/Pterodactyl-theme/main/install.sh -o install.sh
+curl -s -L https://raw.githubusercontent.com/OddBoyXD/Pterodactyl-theme/main/install.sh -o install.sh
 
 # 2. Make the script executable
 chmod +x install.sh

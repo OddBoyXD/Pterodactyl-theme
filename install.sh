@@ -6,7 +6,7 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-GITHUB_USERNAME="OddBoyXdxd69"
+GITHUB_USERNAME="OddBoyXD"
 REPO_NAME="Pterodactyl-theme"
 BRANCH_NAME="main"
 

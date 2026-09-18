@@ -40,14 +40,14 @@
         <a href="https://discord.gg/Cz9eDvHMQj"><button class="btn btn-warning" style="width:100%;"><i class="fa fa-fw fa-support"></i> Get Help <small>(via Discord)</small></button></a>
     </div>
     <div class="col-xs-6 col-sm-3 text-center">
-        <a href="https://github.com/OddBoyXdxd69/Pterodactyl-theme"><button class="btn btn-primary" style="width:100%;"><i class="fa fa-fw fa-link"></i> Documentation</button></a>
+        <a href="https://github.com/OddBoyXD/Pterodactyl-theme"><button class="btn btn-primary" style="width:100%;"><i class="fa fa-fw fa-link"></i> Documentation</button></a>
     </div>
     <div class="clearfix visible-xs-block">&nbsp;</div>
     <div class="col-xs-6 col-sm-3 text-center">
-        <a href="https://github.com/OddBoyXdxd69/Pterodactyl-theme"><button class="btn btn-primary" style="width:100%;"><i class="fa fa-fw fa-support"></i> GitHub</button></a>
+        <a href="https://github.com/OddBoyXD/Pterodactyl-theme"><button class="btn btn-primary" style="width:100%;"><i class="fa fa-fw fa-support"></i> GitHub</button></a>
     </div>
     <div class="col-xs-6 col-sm-3 text-center">
-        <a href="https://github.com/OddBoyXdxd69/Pterodactyl-theme"><button class="btn btn-success" style="width:100%;"><i class="fa fa-fw fa-money"></i> Support the Project</button></a>
+        <a href="https://github.com/OddBoyXD/Pterodactyl-theme"><button class="btn btn-success" style="width:100%;"><i class="fa fa-fw fa-money"></i> Support the Project</button></a>
     </div>
 </div>
 @endsection
