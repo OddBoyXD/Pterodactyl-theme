@@ -1,0 +1,8 @@
+node_modules/
+.yarn/
+*.log
+.env
+update_theme.py
+public/assets/*.js
+public/assets/*.map
+public/assets/manifest.json

@@ -85,46 +85,59 @@
                                 <i class="fa fa-gamepad"></i> <span>Application API</span>
                             </a>
                         </li>
-                        <li class="header">PTERO PLUGINS</li>
-                        <li class="{{ Route::currentRouteName() !== 'admin.theme' ?: 'active' }}">
-                            <a href="{{ route('admin.theme') }}">
-                                <i class="fa fa-paint-brush"></i> <span>Theme Settings</span>
+                        <li class="header" style="color: #a855f7; font-weight: 700; letter-spacing: 1px; font-size: 11px;">EXTENSIONS & PLUGINS</li>
+                        <li class="treeview {{ in_array(Route::currentRouteName(), ['admin.theme', 'admin.registration', 'admin.subdomains', 'admin.plugins', 'admin.versions', 'admin.tickets', 'admin.tickets.config', 'admin.settings.backups']) || starts_with(Route::currentRouteName(), 'admin.subdomains') || starts_with(Route::currentRouteName(), 'admin.plugins') || starts_with(Route::currentRouteName(), 'admin.versions') || starts_with(Route::currentRouteName(), 'admin.tickets') ? 'active menu-open' : '' }}">
+                            <a href="#" style="border-left: 3px solid #a855f7; transition: all 0.3s ease; display: flex; align-items: center; justify-content: space-between;">
+                                <div>
+                                    <i class="fa fa-cubes text-purple" style="color: #a855f7; width: 20px;"></i> <span>PTERO PLUGINS</span>
+                                </div>
+                                <span class="pull-right-container" style="display: flex; align-items: center; gap: 6px;">
+                                    <span class="label pull-right" style="background: linear-gradient(135deg, #a855f7, #6366f1); border-radius: 10px; font-size: 10px; padding: 2px 7px; color: #fff; font-weight: 600;">8</span>
+                                    <i class="fa fa-angle-left pull-right" style="transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);"></i>
+                                </span>
                             </a>
-                        </li>
-                        <li class="{{ Route::currentRouteName() !== 'admin.registration' ?: 'active' }}">
-                            <a href="{{ route('admin.registration') }}">
-                                <i class="fa fa-user-plus"></i> <span>Register Config</span>
-                            </a>
-                        </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.subdomains') ?: 'active' }}">
-                            <a href="{{ route('admin.subdomains') }}">
-                                <i class="fa fa-link"></i> <span>Subdomains</span>
-                            </a>
-                        </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.plugins') ?: 'active' }}">
-                            <a href="{{ route('admin.plugins') }}">
-                                <i class="fa fa-puzzle-piece"></i> <span>Plugins Downloader</span>
-                            </a>
-                        </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.versions') ?: 'active' }}">
-                            <a href="{{ route('admin.versions') }}">
-                                <i class="fa fa-download"></i> <span>Versions Downloader</span>
-                            </a>
-                        </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.tickets') ?: 'active' }}">
-                            <a href="{{ route('admin.tickets') }}">
-                                <i class="fa fa-ticket"></i> <span>Support Tickets</span>
-                            </a>
-                        </li>
-                        <li class="{{ Route::currentRouteName() !== 'admin.tickets.config' ?: 'active' }}">
-                            <a href="{{ route('admin.tickets.config') }}">
-                                <i class="fa fa-wrench"></i> <span>Tickets Config</span>
-                            </a>
-                        </li>
-                        <li class="{{ Route::currentRouteName() !== 'admin.settings.backups' ?: 'active' }}">
-                            <a href="{{ route('admin.settings.backups') }}">
-                                <i class="fa fa-cloud-upload"></i> <span>Universal Backups</span>
-                            </a>
+                            <ul class="treeview-menu" style="background: rgba(15, 17, 26, 0.98); border-left: 2px solid #a855f7; margin-left: 5px; padding: 4px 0; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+                                <li class="{{ Route::currentRouteName() === 'admin.theme' ? 'active' : '' }}">
+                                    <a href="{{ route('admin.theme') }}" style="transition: all 0.2s ease; padding: 7px 15px 7px 20px;">
+                                        <i class="fa fa-paint-brush text-aqua" style="color: #00c0ef; width: 18px;"></i> <span>Theme Settings</span>
+                                    </a>
+                                </li>
+                                <li class="{{ Route::currentRouteName() === 'admin.registration' ? 'active' : '' }}">
+                                    <a href="{{ route('admin.registration') }}" style="transition: all 0.2s ease; padding: 7px 15px 7px 20px;">
+                                        <i class="fa fa-user-plus text-green" style="color: #00a65a; width: 18px;"></i> <span>Register Config</span>
+                                    </a>
+                                </li>
+                                <li class="{{ starts_with(Route::currentRouteName(), 'admin.subdomains') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.subdomains') }}" style="transition: all 0.2s ease; padding: 7px 15px 7px 20px;">
+                                        <i class="fa fa-link text-yellow" style="color: #f39c12; width: 18px;"></i> <span>Subdomains</span>
+                                    </a>
+                                </li>
+                                <li class="{{ starts_with(Route::currentRouteName(), 'admin.plugins') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.plugins') }}" style="transition: all 0.2s ease; padding: 7px 15px 7px 20px;">
+                                        <i class="fa fa-puzzle-piece text-purple" style="color: #9333ea; width: 18px;"></i> <span>Plugins Downloader</span>
+                                    </a>
+                                </li>
+                                <li class="{{ starts_with(Route::currentRouteName(), 'admin.versions') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.versions') }}" style="transition: all 0.2s ease; padding: 7px 15px 7px 20px;">
+                                        <i class="fa fa-download text-teal" style="color: #39cccc; width: 18px;"></i> <span>Versions Downloader</span>
+                                    </a>
+                                </li>
+                                <li class="{{ starts_with(Route::currentRouteName(), 'admin.tickets') && Route::currentRouteName() !== 'admin.tickets.config' ? 'active' : '' }}">
+                                    <a href="{{ route('admin.tickets') }}" style="transition: all 0.2s ease; padding: 7px 15px 7px 20px;">
+                                        <i class="fa fa-ticket text-red" style="color: #dd4b39; width: 18px;"></i> <span>Support Tickets</span>
+                                    </a>
+                                </li>
+                                <li class="{{ Route::currentRouteName() === 'admin.tickets.config' ? 'active' : '' }}">
+                                    <a href="{{ route('admin.tickets.config') }}" style="transition: all 0.2s ease; padding: 7px 15px 7px 20px;">
+                                        <i class="fa fa-wrench text-orange" style="color: #ff851b; width: 18px;"></i> <span>Tickets Config</span>
+                                    </a>
+                                </li>
+                                <li class="{{ Route::currentRouteName() === 'admin.settings.backups' ? 'active' : '' }}">
+                                    <a href="{{ route('admin.settings.backups') }}" style="transition: all 0.2s ease; padding: 7px 15px 7px 20px;">
+                                        <i class="fa fa-cloud-upload text-blue" style="color: #3c8dbc; width: 18px;"></i> <span>Universal Backups</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="header">MANAGEMENT</li>
                         <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.databases') ?: 'active' }}">
@@ -174,7 +187,7 @@
                 <section class="content">
                     <div class="row">
                         <div class="col-xs-12">
-                            @if (count($errors) > 0)
+                            @if (isset($errors) && $errors->any())
                                 <div class="alert alert-danger">
                                     There was an error validating the data provided.<br><br>
                                     <ul>

@@ -29,9 +29,9 @@ class AssetComposer
                 'siteKey' => config('recaptcha.website_key') ?? '',
             ],
             'theme' => [
-                'logo' => trim(config('pterodactyl.theme.login_logo', '')) ?: '/assets/svgs/pterodactyl.svg',
+                'logo' => trim((string) config('pterodactyl.theme.login_logo', '')) ?: '/assets/svgs/pterodactyl.svg',
                 'footer' => config('pterodactyl.theme.login_footer') ?: '',
-                'discord_url' => trim(config('pterodactyl.theme.discord_url', '')) ?: 'https://discord.gg',
+                'discord_url' => trim((string) config('pterodactyl.theme.discord_url', '')) ?: 'https://discord.gg',
                 'announcement_enabled' => (bool) config('pterodactyl.theme.announcement_enabled', false),
                 'announcement_text' => config('pterodactyl.theme.announcement_text') ?: '',
                 'announcement_type' => config('pterodactyl.theme.announcement_type') ?: 'info',
@@ -39,11 +39,11 @@ class AssetComposer
             ],
             'plugins' => [
                 'enabled' => (bool) config('pterodactyl.plugins.enabled', false),
-                'nests' => array_filter(array_map('intval', explode(',', config('pterodactyl.plugins.nests', '')))),
+                'nests' => array_filter(array_map('intval', explode(',', (string) config('pterodactyl.plugins.nests', '')))),
             ],
             'versions' => [
                 'enabled' => (bool) config('pterodactyl.versions.enabled', false),
-                'nests' => array_filter(array_map('intval', explode(',', config('pterodactyl.versions.nests', '')))),
+                'nests' => array_filter(array_map('intval', explode(',', (string) config('pterodactyl.versions.nests', '')))),
             ],
             'tickets' => [
                 'enabled' => (bool) config('pterodactyl.tickets.enabled', true),

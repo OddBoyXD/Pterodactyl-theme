@@ -4,6 +4,15 @@ import { Link, NavLink, useRouteMatch, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCogs,
+    faCubes,
+    faPaintBrush,
+    faUserPlus,
+    faLink,
+    faTicketAlt,
+    faWrench,
+    faCloudUploadAlt,
+    faChevronDown,
+    faChevronRight,
     faLayerGroup,
     faSignOutAlt,
     faBars,
@@ -150,6 +159,7 @@ export default () => {
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const [confirmLogout, setConfirmLogout] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [pluginsOpen, setPluginsOpen] = useState(false);
 
     useEffect(() => {
         document.body.classList.remove('light-mode');
@@ -283,13 +293,75 @@ export default () => {
                     {rootAdmin && (
                         <>
                             <div className="h-px bg-neutral-800 my-4" />
-                            <div className="text-[10px] font-bold text-neutral-500 px-4 pb-2 tracking-wider uppercase">
-                                Administration
+                            <div className="text-[10px] font-bold text-neutral-500 px-4 pb-2 tracking-wider uppercase flex items-center justify-between">
+                                <span>Administration</span>
                             </div>
                             <SidebarAnchor href="/admin" rel="noreferrer">
-                                <FontAwesomeIcon icon={faCogs} css={tw`w-5 mr-4 text-center`} />
+                                <FontAwesomeIcon icon={faCogs} css={tw`w-5 mr-4 text-center text-neutral-400`} />
                                 <span>Admin Panel</span>
                             </SidebarAnchor>
+
+                            {/* Ptero Plugins Accordion Section */}
+                            <div className="mt-1">
+                                <button
+                                    type="button"
+                                    onClick={() => setPluginsOpen(!pluginsOpen)}
+                                    className="flex items-center justify-between w-full px-4 py-2.5 text-neutral-400 hover:text-white hover:bg-neutral-800/40 rounded-lg transition-all duration-200 text-left font-medium text-sm group"
+                                >
+                                    <div className="flex items-center">
+                                        <FontAwesomeIcon icon={faCubes} css={tw`w-5 mr-4 text-center text-purple-400 group-hover:text-purple-300 transition-colors`} />
+                                        <span>Ptero Plugins</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-purple-600/30 text-purple-300 border border-purple-500/30">
+                                            8
+                                        </span>
+                                        <FontAwesomeIcon
+                                            icon={faChevronDown}
+                                            className={`text-xs transition-transform duration-300 ${pluginsOpen ? 'rotate-180 text-purple-400' : 'text-neutral-500'}`}
+                                        />
+                                    </div>
+                                </button>
+
+                                <div
+                                    className={`pl-5 pr-1 space-y-1 overflow-hidden transition-all duration-300 ease-in-out ${
+                                        pluginsOpen ? 'max-h-96 opacity-100 py-1.5' : 'max-h-0 opacity-0'
+                                    }`}
+                                >
+                                    <SidebarAnchor href="/admin/theme" rel="noreferrer" css={tw`text-xs py-1.5 px-3 hover:text-cyan-400`}>
+                                        <FontAwesomeIcon icon={faPaintBrush} css={tw`w-4 mr-3 text-cyan-400`} />
+                                        <span>Theme Settings</span>
+                                    </SidebarAnchor>
+                                    <SidebarAnchor href="/admin/registration" rel="noreferrer" css={tw`text-xs py-1.5 px-3 hover:text-green-400`}>
+                                        <FontAwesomeIcon icon={faUserPlus} css={tw`w-4 mr-3 text-green-400`} />
+                                        <span>Register Config</span>
+                                    </SidebarAnchor>
+                                    <SidebarAnchor href="/admin/subdomains" rel="noreferrer" css={tw`text-xs py-1.5 px-3 hover:text-yellow-400`}>
+                                        <FontAwesomeIcon icon={faLink} css={tw`w-4 mr-3 text-yellow-400`} />
+                                        <span>Subdomains</span>
+                                    </SidebarAnchor>
+                                    <SidebarAnchor href="/admin/plugins" rel="noreferrer" css={tw`text-xs py-1.5 px-3 hover:text-purple-400`}>
+                                        <FontAwesomeIcon icon={faPuzzlePiece} css={tw`w-4 mr-3 text-purple-400`} />
+                                        <span>Plugins Downloader</span>
+                                    </SidebarAnchor>
+                                    <SidebarAnchor href="/admin/versions" rel="noreferrer" css={tw`text-xs py-1.5 px-3 hover:text-cyan-400`}>
+                                        <FontAwesomeIcon icon={faDownload} css={tw`w-4 mr-3 text-cyan-400`} />
+                                        <span>Versions Downloader</span>
+                                    </SidebarAnchor>
+                                    <SidebarAnchor href="/admin/tickets" rel="noreferrer" css={tw`text-xs py-1.5 px-3 hover:text-red-400`}>
+                                        <FontAwesomeIcon icon={faTicketAlt} css={tw`w-4 mr-3 text-red-400`} />
+                                        <span>Support Tickets</span>
+                                    </SidebarAnchor>
+                                    <SidebarAnchor href="/admin/tickets/config" rel="noreferrer" css={tw`text-xs py-1.5 px-3 hover:text-yellow-500`}>
+                                        <FontAwesomeIcon icon={faWrench} css={tw`w-4 mr-3 text-yellow-500`} />
+                                        <span>Tickets Config</span>
+                                    </SidebarAnchor>
+                                    <SidebarAnchor href="/admin/settings/backups" rel="noreferrer" css={tw`text-xs py-1.5 px-3 hover:text-blue-400`}>
+                                        <FontAwesomeIcon icon={faCloudUploadAlt} css={tw`w-4 mr-3 text-blue-400`} />
+                                        <span>Universal Backups</span>
+                                    </SidebarAnchor>
+                                </div>
+                            </div>
                         </>
                     )}
                 </div>
