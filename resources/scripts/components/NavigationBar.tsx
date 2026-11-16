@@ -53,18 +53,18 @@ import Can from '@/components/elements/Can';
 import { Dialog } from '@/components/elements/dialog';
 
 const SidebarLink = styled(NavLink)`
-    ${tw`flex items-center w-full px-4 py-2.5 text-neutral-400 hover:text-purple-200 hover:bg-purple-900/20 rounded-xl transition-all duration-200 no-underline font-medium text-sm hover:translate-x-1`};
+    ${tw`flex items-center w-full px-3.5 py-2.5 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-xl transition-all duration-150 no-underline font-medium text-sm`};
     &.active {
-        ${tw`text-white bg-gradient-to-r from-purple-600 to-indigo-600 shadow-md font-semibold border-l-2 border-purple-300`};
+        ${tw`text-white bg-gradient-to-r from-purple-600 to-indigo-600 shadow-md font-semibold border-l-4 border-purple-300`};
     }
 `;
 
 const SidebarAnchor = styled.a`
-    ${tw`flex items-center w-full px-4 py-2.5 text-neutral-400 hover:text-purple-200 hover:bg-purple-900/20 rounded-xl transition-all duration-200 no-underline font-medium text-sm hover:translate-x-1`};
+    ${tw`flex items-center w-full px-3.5 py-2.5 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-xl transition-all duration-150 no-underline font-medium text-sm`};
 `;
 
 const SidebarButton = styled.button`
-    ${tw`flex items-center w-full px-4 py-2.5 text-neutral-400 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-all duration-200 text-left font-medium text-sm hover:translate-x-1`};
+    ${tw`flex items-center w-full px-3.5 py-2.5 text-neutral-400 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-all duration-150 text-left font-medium text-sm`};
 `;
 
 const iconMap: Record<string, any> = {
@@ -268,29 +268,43 @@ export default () => {
                 {/* Right Side: Grouped Boxed Icons */}
                 <div css={tw`flex items-center space-x-2 flex-shrink-0`}>
                     {discordUrl && (
-                        <a href={discordUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-xl bg-neutral-900/90 border border-neutral-800/80 text-neutral-400 hover:text-purple-300 hover:border-purple-500/50 hover:bg-neutral-800 transition-all duration-200 shadow-sm" title="Join Discord">
+                        <a
+                            href={discordUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-[#121727] hover:bg-[#1a2238] border border-neutral-800 hover:border-purple-500/50 text-neutral-300 hover:text-purple-300 transition-all duration-200 shadow-md active:scale-95"
+                            title="Join Discord"
+                        >
                             <DiscordIcon />
                         </a>
                     )}
-                    <button
-                        type="button"
-                        onClick={() => {
-                            setNotificationOpen(true);
-                            handleMarkAllRead();
-                        }}
-                        className="relative w-10 h-10 flex items-center justify-center rounded-xl bg-neutral-900/90 border border-neutral-800/80 text-neutral-300 hover:text-purple-300 hover:border-purple-500/50 hover:bg-neutral-800 transition-all duration-200 shadow-md cursor-pointer"
-                        title="Notifications & Announcements"
-                    >
-                        <FontAwesomeIcon icon={faBell} size="lg" />
+                    <div className="relative inline-flex items-center justify-center">
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setNotificationOpen(true);
+                                handleMarkAllRead();
+                            }}
+                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-[#121727] hover:bg-[#1a2238] border border-neutral-800 hover:border-purple-500/50 text-neutral-300 hover:text-purple-300 transition-all duration-200 shadow-md active:scale-95 cursor-pointer focus:outline-none"
+                            title="Notifications & Announcements"
+                        >
+                            <FontAwesomeIcon icon={faBell} size="lg" />
+                        </button>
                         {unreadCount > 0 && (
-                            <span className="absolute -top-1.5 -right-1.5 z-20 flex h-5 min-w-[20px] px-1.5 items-center justify-center rounded-full bg-gradient-to-r from-red-500 to-red-600 text-[10px] font-black text-white shadow-lg border-2 border-[#0f1423] ring-1 ring-red-400/50 animate-pulse pointer-events-none">
+                            <span className="absolute -top-1.5 -right-1.5 z-30 flex h-5 min-w-[20px] px-1 items-center justify-center rounded-full bg-gradient-to-r from-red-500 to-rose-600 text-[10px] font-black text-white shadow-lg border-2 border-[#0f1423] ring-1 ring-red-400/50 pointer-events-none animate-pulse">
                                 {unreadCount > 9 ? '9+' : unreadCount}
                             </span>
                         )}
-                    </button>
-                    <NavLink to="/support" className="w-10 h-10 flex items-center justify-center rounded-xl bg-neutral-900/90 border border-neutral-800/80 text-neutral-400 hover:text-purple-300 hover:border-purple-500/50 hover:bg-neutral-800 transition-all duration-200 shadow-sm" title="Support Tickets">
-                        <FontAwesomeIcon icon={faHeadset} size="lg" />
-                    </NavLink>
+                    </div>
+                    {isTicketsEnabled && (
+                        <NavLink
+                            to="/support"
+                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-[#121727] hover:bg-[#1a2238] border border-neutral-800 hover:border-purple-500/50 text-neutral-300 hover:text-purple-300 transition-all duration-200 shadow-md active:scale-95"
+                            title="Support Tickets"
+                        >
+                            <FontAwesomeIcon icon={faHeadset} size="lg" />
+                        </NavLink>
+                    )}
                 </div>
             </div>
 
@@ -314,7 +328,7 @@ export default () => {
 
 
                 {/* Navigation Links */}
-                <div css={tw`flex-1 overflow-y-auto px-3 py-4 space-y-1`}>
+                <div className="flex-1 overflow-y-auto px-3 py-4 space-y-1 custom-scrollbar">
                     <div className="text-[10px] font-bold text-neutral-500 px-4 pb-2 tracking-wider uppercase">
                         Global
                     </div>
@@ -375,7 +389,7 @@ export default () => {
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-purple-600/30 text-purple-300 border border-purple-500/30">
-                                            8
+                                            9
                                         </span>
                                         <FontAwesomeIcon
                                             icon={faChevronDown}
