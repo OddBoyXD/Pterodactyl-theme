@@ -758,16 +758,257 @@
                         font-size: 12px !important;
                     }
                 }
+            
+                /* ========================================================= */
+                /* FLAWLESS RESPONSIVE DESKTOP & MOBILE SIDEBAR FIX          */
+                /* ========================================================= */
+
+                /* Desktop (min-width: 768px) */
+                @media (min-width: 768px) {
+                    header.main-header {
+                        position: fixed !important;
+                        top: 0 !important;
+                        left: 0 !important;
+                        right: 0 !important;
+                        height: 52px !important;
+                        z-index: 1030 !important;
+                        background: #090c13 !important;
+                    }
+                    header.main-header .logo {
+                        width: 250px !important;
+                        height: 52px !important;
+                        line-height: 52px !important;
+                        float: left !important;
+                    }
+                    header.main-header .navbar {
+                        margin-left: 250px !important;
+                        height: 52px !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: space-between !important;
+                    }
+                    aside.main-sidebar {
+                        width: 250px !important;
+                        position: fixed !important;
+                        top: 52px !important;
+                        left: 0 !important;
+                        bottom: 0 !important;
+                        height: calc(100vh - 52px) !important;
+                        overflow-y: auto !important;
+                        padding-top: 0 !important;
+                        z-index: 1020 !important;
+                        background: #090c13 !important;
+                        border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+                    }
+                    .content-wrapper {
+                        margin-left: 250px !important;
+                        padding-top: 52px !important;
+                        min-height: 100vh !important;
+                    }
+                    .main-footer {
+                        margin-left: 250px !important;
+                    }
+                    /* Collapsed sidebar state */
+                    body.sidebar-collapse aside.main-sidebar {
+                        width: 50px !important;
+                    }
+                    body.sidebar-collapse .content-wrapper,
+                    body.sidebar-collapse .main-footer {
+                        margin-left: 50px !important;
+                    }
+                    body.sidebar-collapse header.main-header .navbar {
+                        margin-left: 50px !important;
+                    }
+                    body.sidebar-collapse header.main-header .logo {
+                        width: 50px !important;
+                    }
+                }
+
+                /* Mobile (< 768px) */
+                @media (max-width: 767px) {
+                    /* Fix content-wrapper from translating off-screen */
+                    .content-wrapper,
+                    .main-footer,
+                    .sidebar-open .content-wrapper,
+                    .sidebar-open .main-footer {
+                        -webkit-transform: none !important;
+                        -ms-transform: none !important;
+                        transform: none !important;
+                        margin-left: 0 !important;
+                        padding-top: 54px !important;
+                        width: 100% !important;
+                        min-width: 100% !important;
+                        max-width: 100vw !important;
+                        overflow-x: hidden !important;
+                    }
+
+                    /* Fixed Modern Mobile Header */
+                    header.main-header {
+                        position: fixed !important;
+                        top: 0 !important;
+                        left: 0 !important;
+                        right: 0 !important;
+                        height: 52px !important;
+                        display: flex !important;
+                        flex-direction: row !important;
+                        align-items: center !important;
+                        justify-content: space-between !important;
+                        z-index: 1040 !important;
+                        padding: 0 8px !important;
+                        background: #090c13 !important;
+                        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+                    }
+
+                    /* Force Hamburger Button on the LEFT */
+                    header.main-header .navbar {
+                        display: contents !important;
+                    }
+                    header.main-header .sidebar-toggle {
+                        order: 1 !important;
+                        width: 40px !important;
+                        height: 40px !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        border-radius: 10px !important;
+                        background: rgba(168, 85, 247, 0.12) !important;
+                        border: 1px solid rgba(168, 85, 247, 0.3) !important;
+                        cursor: pointer !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                    }
+                    header.main-header .sidebar-toggle .fa-bars {
+                        color: #c084fc !important;
+                        font-size: 16px !important;
+                    }
+
+                    /* Center Brand Logo */
+                    header.main-header .logo {
+                        order: 2 !important;
+                        width: auto !important;
+                        height: 52px !important;
+                        line-height: 52px !important;
+                        padding: 0 10px !important;
+                        font-size: 15px !important;
+                        border: none !important;
+                        background: transparent !important;
+                        margin: 0 !important;
+                        text-align: center !important;
+                        flex: 1 !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                    }
+
+                    /* User Menu on the RIGHT */
+                    header.main-header .navbar-custom-menu {
+                        order: 3 !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                    }
+                    header.main-header .navbar-custom-menu .navbar-nav {
+                        display: flex !important;
+                        flex-direction: row !important;
+                        align-items: center !important;
+                        gap: 4px !important;
+                        margin: 0 !important;
+                    }
+                    header.main-header .navbar-custom-menu .navbar-nav > li > a {
+                        padding: 8px 10px !important;
+                        display: flex !important;
+                        align-items: center !important;
+                    }
+
+                    /* Mobile Slide-Out Drawer (LEFT SIDE) */
+                    aside.main-sidebar {
+                        position: fixed !important;
+                        top: 0 !important;
+                        left: 0 !important;
+                        bottom: 0 !important;
+                        width: 275px !important;
+                        max-width: 82vw !important;
+                        height: 100vh !important;
+                        padding-top: 54px !important;
+                        background: #090c13 !important;
+                        border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+                        z-index: 1060 !important;
+                        overflow-y: auto !important;
+                        -webkit-overflow-scrolling: touch !important;
+                        -webkit-transform: translateX(-100%) !important;
+                        transform: translateX(-100%) !important;
+                        transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                        box-shadow: none !important;
+                    }
+
+                    /* Open Drawer state */
+                    body.sidebar-open aside.main-sidebar {
+                        -webkit-transform: translateX(0) !important;
+                        transform: translateX(0) !important;
+                        box-shadow: 12px 0 40px rgba(0, 0, 0, 0.85) !important;
+                    }
+
+                    /* Prevent body scrolling when drawer is open */
+                    body.sidebar-open {
+                        overflow: hidden !important;
+                    }
+                }
+
             </style>
 
             <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
             <![endif]-->
+        
+            <script>
+                $(function () {
+                    // Mobile & Desktop Sidebar Toggle Handler
+                    $(document).on(click, .sidebar-toggle, function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if ($(window).width() < 768) {
+                            if ($(body).hasClass(sidebar-open)) {
+                                $(body).removeClass(sidebar-open);
+                                $(#sidebar-mobile-backdrop).fadeOut(200);
+                            } else {
+                                $(body).addClass(sidebar-open);
+                                $(#sidebar-mobile-backdrop).fadeIn(200);
+                            }
+                        } else {
+                            $(body).toggleClass(sidebar-collapse);
+                        }
+                    });
+
+                    // Backdrop tap closes mobile drawer
+                    $(document).on(click, #sidebar-mobile-backdrop, function(e) {
+                        e.preventDefault();
+                        $(body).removeClass(sidebar-open);
+                        $(#sidebar-mobile-backdrop).fadeOut(200);
+                    });
+
+                    // Nav item click closes drawer on mobile
+                    $(document).on(click, aside.main-sidebar .sidebar-menu a, function() {
+                        if ($(window).width() < 768 && !$(this).hasClass(ptero-toggle-btn)) {
+                            $(body).removeClass(sidebar-open);
+                            $(#sidebar-mobile-backdrop).fadeOut(200);
+                        }
+                    });
+
+                    // ESC key closes drawer
+                    $(document).on(keydown, function(e) {
+                        if (e.key === Escape && $(body).hasClass(sidebar-open)) {
+                            $(body).removeClass(sidebar-open);
+                            $(#sidebar-mobile-backdrop).fadeOut(200);
+                        }
+                    });
+                });
+            </script>
+
         @show
     </head>
     <body class="hold-transition skin-blue fixed sidebar-mini">
         <div class="wrapper">
+            <div id="sidebar-mobile-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 1055;"></div>
             <header class="main-header">
                 <a href="{{ route('index') }}" class="logo">
                     <span>{{ config('app.name', 'Pterodactyl') }}</span>
@@ -1028,6 +1269,51 @@
                     });
                 });
             </script>
+        
+            <script>
+                $(function () {
+                    // Mobile & Desktop Sidebar Toggle Handler
+                    $(document).on(click, .sidebar-toggle, function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if ($(window).width() < 768) {
+                            if ($(body).hasClass(sidebar-open)) {
+                                $(body).removeClass(sidebar-open);
+                                $(#sidebar-mobile-backdrop).fadeOut(200);
+                            } else {
+                                $(body).addClass(sidebar-open);
+                                $(#sidebar-mobile-backdrop).fadeIn(200);
+                            }
+                        } else {
+                            $(body).toggleClass(sidebar-collapse);
+                        }
+                    });
+
+                    // Backdrop tap closes mobile drawer
+                    $(document).on(click, #sidebar-mobile-backdrop, function(e) {
+                        e.preventDefault();
+                        $(body).removeClass(sidebar-open);
+                        $(#sidebar-mobile-backdrop).fadeOut(200);
+                    });
+
+                    // Nav item click closes drawer on mobile
+                    $(document).on(click, aside.main-sidebar .sidebar-menu a, function() {
+                        if ($(window).width() < 768 && !$(this).hasClass(ptero-toggle-btn)) {
+                            $(body).removeClass(sidebar-open);
+                            $(#sidebar-mobile-backdrop).fadeOut(200);
+                        }
+                    });
+
+                    // ESC key closes drawer
+                    $(document).on(keydown, function(e) {
+                        if (e.key === Escape && $(body).hasClass(sidebar-open)) {
+                            $(body).removeClass(sidebar-open);
+                            $(#sidebar-mobile-backdrop).fadeOut(200);
+                        }
+                    });
+                });
+            </script>
+
         @show
     </body>
 </html>

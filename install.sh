@@ -144,6 +144,18 @@ chown -R www-data:www-data "$PANEL_DIR"/*
 # 4. Install dependencies and compile assets
 echo "[*] Installing frontend dependencies & building theme assets..."
 cd "$PANEL_DIR"
+# Check Node.js and Yarn
+if ! command -v node >/dev/null 2>&1; then
+  echo "[*] Node.js not found. Installing Node.js 20.x..."
+  curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+  apt-get install -y nodejs
+fi
+
+if ! command -v yarn >/dev/null 2>&1; then
+  echo "[*] Yarn not found. Installing Yarn globally..."
+  npm install -g yarn
+fi
+
 yarn install --ignore-engines
 
 # Compile frontend with memory limit safeguard for low RAM VPS systems
