@@ -50,7 +50,7 @@
                         </tr>
                         @foreach ($nodes as $node)
                             <tr>
-                                <td class="text-center text-muted left-icon" data-action="ping" data-secret="{{ $node->getDecryptedKey() }}" data-location="{{ $node->scheme }}://{{ $node->fqdn }}:{{ $node->daemonListen }}/api/system"><i class="fa fa-fw fa-refresh fa-spin"></i></td>
+                                <td class="text-center text-muted left-icon" data-action="ping" data-node-id="{{ $node->id }}" data-location="{{ $node->scheme }}://{{ $node->fqdn }}:{{ $node->daemonListen }}/api/system" data-secret="{{ $node->getDecryptedKey() }}"><i class="fa fa-fw fa-refresh fa-spin"></i></td>
                                 <td>{!! $node->maintenance_mode ? '<span class="label label-warning"><i class="fa fa-wrench"></i></span> ' : '' !!}<a href="{{ route('admin.nodes.view', $node->id) }}">{{ $node->name }}</a></td>
                                 <td>{{ $node->location->short }}</td>
                                 <td>{{ $node->memory }} MiB</td>
@@ -78,26 +78,26 @@
     <script>
     (function pingNodes() {
         $('td[data-action="ping"]').each(function(i, element) {
+            var nodeId = $(element).data('node-id');
+            var panelUrl = '/admin/nodes/view/' + nodeId + '/system-information';
+
             $.ajax({
                 type: 'GET',
-                url: $(element).data('location'),
-                headers: {
-                    'Authorization': 'Bearer ' + $(element).data('secret'),
-                },
+                url: panelUrl,
                 timeout: 5000
             }).done(function (data) {
-                $(element).find('i').tooltip({
-                    title: 'v' + data.version,
-                });
-                $(element).removeClass('text-muted').find('i').removeClass().addClass('fa fa-fw fa-heartbeat faa-pulse animated').css('color', '#50af51');
+                if (data.status === 'online') {
+                    $(element).find('i').tooltip({
+                        title: 'v' + data.version + ' (' + (data.latency || 'OK') + ')',
+                    });
+                    $(element).removeClass('text-muted').find('i').removeClass().addClass('fa fa-fw fa-heartbeat faa-pulse animated').css('color', '#50af51');
+                } else {
+                    $(element).removeClass('text-muted').find('i').removeClass().addClass('fa fa-fw fa-heart-o').css('color', '#d9534f');
+                    $(element).find('i').tooltip({ title: 'Daemon Offline / Unreachable' });
+                }
             }).fail(function (error) {
-                var errorText = 'Error connecting to node! Check browser console for details.';
-                try {
-                    errorText = error.responseJSON.errors[0].detail || errorText;
-                } catch (ex) {}
-
                 $(element).removeClass('text-muted').find('i').removeClass().addClass('fa fa-fw fa-heart-o').css('color', '#d9534f');
-                $(element).find('i').tooltip({ title: errorText });
+                $(element).find('i').tooltip({ title: 'Error checking node status' });
             });
         }).promise().done(function () {
             setTimeout(pingNodes, 10000);

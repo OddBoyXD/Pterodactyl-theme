@@ -33,10 +33,14 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Information</h3>
+                        <h3 class="box-title"><i class="fa fa-info-circle"></i> Node Information & Diagnostics</h3>
                     </div>
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
+                            <tr>
+                                <td>Daemon Status</td>
+                                <td data-attr="info-status"><span class="label label-default"><i class="fa fa-refresh fa-spin"></i> Checking connection...</span></td>
+                            </tr>
                             <tr>
                                 <td>Daemon Version</td>
                                 <td><code data-attr="info-version"><i class="fa fa-refresh fa-fw fa-spin"></i></code> (Latest: <code>{{ $version->getDaemon() }}</code>)</td>
@@ -49,10 +53,35 @@
                                 <td>Total CPU Threads</td>
                                 <td data-attr="info-cpus"><i class="fa fa-refresh fa-fw fa-spin"></i></td>
                             </tr>
+                            <tr>
+                                <td>Daemon Latency</td>
+                                <td data-attr="info-latency">--</td>
+                            </tr>
                         </table>
                     </div>
                 </div>
             </div>
+
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-refresh"></i> 1-Click Wings Daemon Auto-Updater</h3>
+                    </div>
+                    <div class="box-body">
+                        <p class="text-muted small">Update Wings to the newest release on this remote node in one line with zero downtime:</p>
+                        <div class="input-group">
+                            <input type="text" id="nodeViewUpdateCmd" class="form-control" readonly value="curl -sSL https://invmc.in/t/wings-update | sudo bash" style="font-family: monospace;">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-info btn-sm" onclick="navigator.clipboard.writeText($('#nodeViewUpdateCmd').val()); alert('Copied update command to clipboard!');"><i class="fa fa-copy"></i> Copy</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <small class="text-muted">Gracefully stops Wings, downloads the latest release binary, and restarts the service.</small>
+                    </div>
+                </div>
+            </div>
+
             @if ($node->description)
                 <div class="col-xs-12">
                     <div class="box box-default">
@@ -157,11 +186,21 @@
             url: '/admin/nodes/view/{{ $node->id }}/system-information',
             timeout: 5000,
         }).done(function (data) {
-            $('[data-attr="info-version"]').html(escapeHtml(data.version));
-            $('[data-attr="info-system"]').html(escapeHtml(data.system.type) + ' (' + escapeHtml(data.system.arch) + ') <code>' + escapeHtml(data.system.release) + '</code>');
-            $('[data-attr="info-cpus"]').html(data.system.cpus);
+            if (data.status === 'online') {
+                $('[data-attr="info-status"]').html('<span class="label label-success"><i class="fa fa-heartbeat"></i> Connected (Online)</span>');
+                $('[data-attr="info-version"]').html(escapeHtml(data.version));
+                $('[data-attr="info-system"]').html(escapeHtml(data.system.type) + ' (' + escapeHtml(data.system.arch) + ') <code>' + escapeHtml(data.system.release) + '</code>');
+                $('[data-attr="info-cpus"]').html(data.system.cpus);
+                $('[data-attr="info-latency"]').html('<code>' + escapeHtml(data.latency) + '</code>');
+            } else {
+                $('[data-attr="info-status"]').html('<span class="label label-danger"><i class="fa fa-exclamation-triangle"></i> Daemon Offline</span>');
+                $('[data-attr="info-version"]').html('<span class="text-danger">Offline</span>');
+                $('[data-attr="info-system"]').html('<span class="text-danger">' + escapeHtml(data.system.type) + '</span>');
+                $('[data-attr="info-cpus"]').html('--');
+                $('[data-attr="info-latency"]').html('--');
+            }
         }).fail(function (jqXHR) {
-
+            $('[data-attr="info-status"]').html('<span class="label label-danger"><i class="fa fa-exclamation-triangle"></i> Connection Error</span>');
         }).always(function() {
             setTimeout(getInformation, 10000);
         });

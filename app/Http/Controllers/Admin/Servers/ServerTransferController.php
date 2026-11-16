@@ -119,6 +119,15 @@ class ServerTransferController extends Controller
 
         $server->validateTransferState();
 
+        // Verify that target node daemon is online and responding before starting transfer
+        try {
+            $this->daemonTransferRepository->setNode($node)->getHttpClient()->get('/api/system', ['timeout' => 5]);
+        } catch (\Throwable $exception) {
+            \Log::warning($exception, ['server_id' => $server->id, 'target_node_id' => $node->id]);
+            $this->alert->danger('Failed to start transfer: The target node daemon (Wings) on "' . $node->name . '" is unreachable or offline. Please ensure Wings is running on the target node before starting migration.')->flash();
+            return redirect()->route('admin.servers.view.manage', $server->id);
+        }
+
         $this->connection->transaction(function () use ($server, $node_id, $allocation_id, $additional_allocations) {
             // Create a new ServerTransfer entry.
             $transfer = new ServerTransfer();
@@ -151,6 +160,59 @@ class ServerTransferController extends Controller
 
         $this->alert->success(trans('admin/server.alerts.transfer_started'))->flash();
 
+        return redirect()->route('admin.servers.view.manage', $server->id);
+    }
+
+    /**
+     * Cancels an active or stuck transfer, releases reserved allocations on the target node,
+     * and restores the server to normal operation.
+     */
+    public function cancel(Request $request, Server $server): RedirectResponse
+    {
+        $transfer = ServerTransfer::query()
+            ->where('server_id', $server->id)
+            ->whereNull('successful')
+            ->orderByDesc('id')
+            ->first();
+
+        if (is_null($transfer)) {
+            $server->status = null;
+            $server->save();
+
+            $this->alert->warning('No active transfer record found. Server status has been reset to normal.')->flash();
+            return redirect()->route('admin.servers.view.manage', $server->id);
+        }
+
+        $this->connection->transaction(function () use ($server, $transfer) {
+            // Free the reserved target allocations
+            $targetAllocations = array_merge([$transfer->new_allocation], $transfer->new_additional_allocations ?? []);
+            if (!empty($targetAllocations)) {
+                \Pterodactyl\Models\Allocation::query()
+                    ->whereIn('id', $targetAllocations)
+                    ->where('server_id', $server->id)
+                    ->update(['server_id' => null]);
+            }
+
+            // Restore original server allocation if needed
+            if (!empty($transfer->old_allocation) && $server->allocation_id !== $transfer->old_allocation) {
+                $server->allocation_id = $transfer->old_allocation;
+            }
+
+            // Restore original server node if needed
+            if (!empty($transfer->old_node) && $server->node_id !== $transfer->old_node) {
+                $server->node_id = $transfer->old_node;
+            }
+
+            // Clear server status
+            $server->status = null;
+            $server->save();
+
+            // Mark transfer as cancelled / failed
+            $transfer->successful = false;
+            $transfer->save();
+        });
+
+        $this->alert->success('Server transfer was successfully cancelled and original server state restored!')->flash();
         return redirect()->route('admin.servers.view.manage', $server->id);
     }
 

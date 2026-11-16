@@ -96,11 +96,11 @@
             <div class="col-sm-4">
                 <div class="box box-success">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Transfer Server</h3>
+                        <h3 class="box-title"><i class="fa fa-exchange"></i> Transfer Server</h3>
                     </div>
                     <div class="box-body">
                         <p>
-                            Transfer this server to another node connected to this panel. All server files, allocations, and configurations will be automatically migrated.
+                            Transfer this server to another node or reallocate ports on this node. Files, allocations, and configurations migrate seamlessly.
                         </p>
                     </div>
 
@@ -116,19 +116,25 @@
             </div>
         @else
             <div class="col-sm-4">
-                <div class="box box-success">
+                <div class="box box-warning">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Transfer Server</h3>
+                        <h3 class="box-title"><i class="fa fa-refresh fa-spin"></i> Transfer In Progress</h3>
                     </div>
                     <div class="box-body">
                         <p>
                             This server is currently being transferred to another node.
-                            Transfer was initiated at <strong>{{ $server->transfer->created_at }}</strong>
+                            Transfer was initiated at <strong>{{ $server->transfer->created_at }}</strong>.
+                        </p>
+                        <p class="text-muted small">
+                            If the transfer failed or is stuck, you can cancel and restore the server immediately.
                         </p>
                     </div>
 
                     <div class="box-footer">
-                        <button class="btn btn-success disabled">Transfer Server</button>
+                        <form action="{{ route('admin.servers.view.manage.transfer.cancel', $server->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to cancel this transfer? This will release reserved target ports and restore full access to this server.');">
+                            {!! csrf_field() !!}
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-times"></i> Cancel / Reset Transfer</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -141,13 +147,13 @@
                 <form action="{{ route('admin.servers.view.manage.transfer', $server->id) }}" method="POST">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Transfer Server</h4>
+                        <h4 class="modal-title"><i class="fa fa-exchange"></i> Transfer Server</h4>
                     </div>
 
                     <div class="modal-body">
                         <div class="row">
                             <div class="form-group col-md-12">
-                                <label for="pNodeId">Node</label>
+                                <label for="pNodeId">Target Node</label>
                                 <select name="node_id" id="pNodeId" class="form-control">
                                     @foreach($locations as $location)
                                         <optgroup label="{{ $location->long }} ({{ $location->short }})">
@@ -179,7 +185,7 @@
                     <div class="modal-footer">
                         {!! csrf_field() !!}
                         <button type="button" class="btn btn-default btn-sm pull-left" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-success btn-sm">Confirm</button>
+                        <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-paper-plane"></i> Start Transfer</button>
                     </div>
                 </form>
             </div>
