@@ -35,8 +35,19 @@
 
             <style>
                 /* Modern Dark Obsidian Theme for Pterodactyl Admin Panel */
-                *, html, body {
+                html, body, button, input, select, textarea, p, h1, h2, h3, h4, h5, h6, td, th, label, .box-title, .small-box, .info-box, span:not(.fa):not(.fas):not(.far):not(.fal):not(.fab):not([class*="fa-"]):not(.glyphicon):not(.ion), a:not(.fa):not(.fas):not(.far):not(.fal):not(.fab):not([class*="fa-"]), div:not(.fa):not(.fas):not(.far):not(.fal):not(.fab):not([class*="fa-"]) {
                     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+                }
+                .fa, .fas, .far, .fal, .fab, [class*="fa-"], [class^="fa-"] {
+                    font-family: 'FontAwesome', 'Font Awesome 6 Free', 'Font Awesome 5 Free' !important;
+                    font-style: normal !important;
+                    display: inline-block !important;
+                }
+                .glyphicon {
+                    font-family: 'Glyphicons Halflings' !important;
+                }
+                .ion {
+                    font-family: 'Ionicons' !important;
                 }
                 body, .wrapper, .content-wrapper, .right-side {
                     background-color: #0b0f19 !important;

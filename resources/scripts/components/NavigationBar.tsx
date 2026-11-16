@@ -50,18 +50,18 @@ import Can from '@/components/elements/Can';
 import { Dialog } from '@/components/elements/dialog';
 
 const SidebarLink = styled(NavLink)`
-    ${tw`flex items-center w-full px-4 py-2.5 text-neutral-400 hover:text-white hover:bg-neutral-800/40 rounded-lg transition-all duration-150 no-underline font-medium`};
+    ${tw`flex items-center w-full px-4 py-2.5 text-neutral-400 hover:text-purple-200 hover:bg-purple-900/20 rounded-xl transition-all duration-200 no-underline font-medium text-sm hover:translate-x-1`};
     &.active {
-        ${tw`text-white bg-purple-600 hover:bg-purple-700 shadow-md`};
+        ${tw`text-white bg-gradient-to-r from-purple-600 to-indigo-600 shadow-md font-semibold border-l-2 border-purple-300`};
     }
 `;
 
 const SidebarAnchor = styled.a`
-    ${tw`flex items-center w-full px-4 py-2.5 text-neutral-400 hover:text-white hover:bg-neutral-800/40 rounded-lg transition-all duration-150 no-underline font-medium`};
+    ${tw`flex items-center w-full px-4 py-2.5 text-neutral-400 hover:text-purple-200 hover:bg-purple-900/20 rounded-xl transition-all duration-200 no-underline font-medium text-sm hover:translate-x-1`};
 `;
 
 const SidebarButton = styled.button`
-    ${tw`flex items-center w-full px-4 py-2.5 text-neutral-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-150 text-left font-medium`};
+    ${tw`flex items-center w-full px-4 py-2.5 text-neutral-400 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-all duration-200 text-left font-medium text-sm hover:translate-x-1`};
 `;
 
 const iconMap: Record<string, any> = {
@@ -202,7 +202,7 @@ export default () => {
 
             {/* Mobile & Desktop Header Topbar */}
             <div
-                className="light-topbar fixed top-0 right-0 h-16 bg-[#0b0c16] border-b border-neutral-800 flex items-center justify-between px-4 md:px-6 z-40 left-0 md:left-64"
+                className="light-topbar fixed top-0 right-0 h-16 bg-[#0f1423]/95 backdrop-blur-md border-b border-neutral-800 flex items-center justify-between px-4 md:px-6 z-40 left-0 md:left-64"
             >
                 {/* Left Side: Mobile Hamburger button & Name */}
                 <div css={tw`flex items-center`}>
@@ -220,14 +220,14 @@ export default () => {
                 {/* Right Side: Grouped Boxed Icons */}
                 <div css={tw`flex items-center space-x-2 flex-shrink-0`}>
                     {discordUrl && (
-                        <a href={discordUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-lg bg-neutral-900 border border-neutral-800 text-neutral-400 hover:text-purple-400 hover:bg-neutral-800 transition-all duration-150" title="Join Discord">
+                        <a href={discordUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-xl bg-neutral-900/90 border border-neutral-800/80 text-neutral-400 hover:text-purple-300 hover:border-purple-500/50 hover:bg-neutral-800 transition-all duration-200 shadow-sm" title="Join Discord">
                             <DiscordIcon />
                         </a>
                     )}
-                    <NavLink to="/account/activity" className="w-10 h-10 flex items-center justify-center rounded-lg bg-neutral-900 border border-neutral-800 text-neutral-400 hover:text-purple-400 hover:bg-neutral-800 transition-all duration-150" title="Activity / Notifications">
+                    <NavLink to="/account/activity" className="w-10 h-10 flex items-center justify-center rounded-xl bg-neutral-900/90 border border-neutral-800/80 text-neutral-400 hover:text-purple-300 hover:border-purple-500/50 hover:bg-neutral-800 transition-all duration-200 shadow-sm" title="Activity / Notifications">
                         <FontAwesomeIcon icon={faBell} size="lg" />
                     </NavLink>
-                    <NavLink to="/support" className="w-10 h-10 flex items-center justify-center rounded-lg bg-neutral-900 border border-neutral-800 text-neutral-400 hover:text-purple-400 hover:bg-neutral-800 transition-all duration-150" title="Support Tickets">
+                    <NavLink to="/support" className="w-10 h-10 flex items-center justify-center rounded-xl bg-neutral-900/90 border border-neutral-800/80 text-neutral-400 hover:text-purple-300 hover:border-purple-500/50 hover:bg-neutral-800 transition-all duration-200 shadow-sm" title="Support Tickets">
                         <FontAwesomeIcon icon={faHeadset} size="lg" />
                     </NavLink>
                 </div>
@@ -240,12 +240,12 @@ export default () => {
 
             {/* Sidebar Navigation */}
             <div
-                className={`fixed top-0 left-0 bottom-0 w-64 bg-[#0b0c16] border-r border-neutral-800 flex flex-col z-50 transition-transform duration-200 ease-in-out theme-sidebar ${
+                className={`fixed top-0 left-0 bottom-0 w-64 bg-[#0f1423]/95 backdrop-blur-md border-r border-neutral-800 flex flex-col z-50 transition-transform duration-200 ease-in-out theme-sidebar ${
                     sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
                 }`}
             >
                 {/* Sidebar Header */}
-                <div css={tw`flex items-center h-16 px-6 border-b border-neutral-800 bg-[#07080e]`}>
+                <div css={tw`flex items-center h-16 px-6 border-b border-neutral-800 bg-[#0c101a]`}>
                     <Link to="/" onClick={() => setSidebarOpen(false)} css={tw`text-xl font-header font-bold text-white tracking-tight truncate no-underline`}>
                         {name}
                     </Link>
@@ -306,10 +306,10 @@ export default () => {
                                 <button
                                     type="button"
                                     onClick={() => setPluginsOpen(!pluginsOpen)}
-                                    className="flex items-center justify-between w-full px-4 py-2.5 text-neutral-400 hover:text-white hover:bg-neutral-800/40 rounded-lg transition-all duration-200 text-left font-medium text-sm group"
+                                    className="flex items-center justify-between w-full px-4 py-2.5 text-neutral-400 hover:text-white hover:bg-neutral-800/40 rounded-lg transition-all duration-200 text-left font-medium text-sm"
                                 >
                                     <div className="flex items-center">
-                                        <FontAwesomeIcon icon={faCubes} css={tw`w-5 mr-4 text-center text-purple-400 group-hover:text-purple-300 transition-colors`} />
+                                        <FontAwesomeIcon icon={faCubes} css={tw`w-5 mr-4 text-center text-purple-400 hover:text-purple-300 transition-colors`} />
                                         <span>Ptero Plugins</span>
                                     </div>
                                     <div className="flex items-center gap-2">
