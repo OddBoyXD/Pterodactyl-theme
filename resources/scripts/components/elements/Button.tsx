@@ -10,36 +10,36 @@ interface Props {
     isSecondary?: boolean;
 }
 
-const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
-    ${tw`relative inline-block rounded p-2 uppercase tracking-wide text-sm transition-all duration-150 border`};
+const ButtonStyle = styled.button<Omit<Props, 'isLoading'>`
+    ${tw`relative inline-flex items-center justify-center rounded-xl p-2 font-bold tracking-wide text-xs uppercase transition-all duration-200 border shadow-md active:scale-95`};
 
     ${(props) =>
         ((!props.isSecondary && !props.color) || props.color === 'primary') &&
         css<Props>`
-            ${(props) => !props.isSecondary && tw`bg-primary-500 border-primary-600 border text-primary-50`};
+            ${(props) => !props.isSecondary && tw`bg-gradient-to-r from-purple-600 to-indigo-600 border-purple-500 text-white shadow-md`};
 
             &:hover:not(:disabled) {
-                ${tw`bg-primary-600 border-primary-700`};
+                ${tw`border-purple-300 shadow-lg`};
             }
         `};
 
     ${(props) =>
         props.color === 'grey' &&
         css`
-            ${tw`border-neutral-600 bg-neutral-500 text-neutral-50`};
+            ${tw`border-neutral-700 bg-neutral-800 text-neutral-200 shadow-sm`};
 
             &:hover:not(:disabled) {
-                ${tw`bg-neutral-600 border-neutral-700`};
+                ${tw`bg-neutral-700 border-neutral-600 text-white shadow-md`};
             }
         `};
 
     ${(props) =>
         props.color === 'green' &&
         css<Props>`
-            ${tw`border-green-600 bg-green-500 text-green-50`};
+            ${tw`border-green-600 bg-gradient-to-r from-green-600 to-green-500 text-white shadow-md`};
 
             &:hover:not(:disabled) {
-                ${tw`bg-green-600 border-green-700`};
+                ${tw`border-green-300 shadow-lg`};
             }
 
             ${(props) =>
@@ -54,10 +54,10 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     ${(props) =>
         props.color === 'red' &&
         css<Props>`
-            ${tw`border-red-600 bg-red-500 text-red-50`};
+            ${tw`border-red-600 bg-gradient-to-r from-red-600 to-red-500 text-white shadow-md`};
 
             &:hover:not(:disabled) {
-                ${tw`bg-red-600 border-red-700`};
+                ${tw`border-red-300 shadow-lg`};
             }
 
             ${(props) =>
@@ -69,21 +69,21 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
                 `};
         `};
 
-    ${(props) => props.size === 'xsmall' && tw`px-2 py-1 text-xs`};
-    ${(props) => (!props.size || props.size === 'small') && tw`px-4 py-2`};
-    ${(props) => props.size === 'large' && tw`p-4 text-sm`};
-    ${(props) => props.size === 'xlarge' && tw`p-4 w-full`};
+    ${(props) => props.size === 'xsmall' && tw`px-3 py-1.5 text-2xs rounded-lg`};
+    ${(props) => (!props.size || props.size === 'small') && tw`px-4 py-2.5`};
+    ${(props) => props.size === 'large' && tw`p-4 text-sm rounded-xl`};
+    ${(props) => props.size === 'xlarge' && tw`p-4 w-full rounded-xl`};
 
     ${(props) =>
         props.isSecondary &&
         css<Props>`
-            ${tw`border-neutral-600 bg-transparent text-neutral-200`};
+            ${tw`border-neutral-800 bg-neutral-900 text-neutral-300 shadow-none`};
 
             &:hover:not(:disabled) {
-                ${tw`border-neutral-500 text-neutral-100`};
-                ${(props) => props.color === 'red' && tw`bg-red-500 border-red-600 text-red-50`};
-                ${(props) => props.color === 'primary' && tw`bg-primary-500 border-primary-600 text-primary-50`};
-                ${(props) => props.color === 'green' && tw`bg-green-500 border-green-600 text-green-50`};
+                ${tw`border-neutral-700 bg-neutral-800 text-white`};
+                ${(props) => props.color === 'red' && tw`bg-red-600 border-red-500 text-white`};
+                ${(props) => props.color === 'primary' && tw`bg-purple-600 border-purple-500 text-white`};
+                ${(props) => props.color === 'green' && tw`bg-green-600 border-green-500 text-white`};
             }
         `};
 

@@ -274,13 +274,16 @@ export default () => {
                     )}
                     <button
                         type="button"
-                        onClick={() => setNotificationOpen(true)}
-                        className="relative w-10 h-10 flex items-center justify-center rounded-xl bg-neutral-900/90 border border-neutral-800/80 text-neutral-400 hover:text-purple-300 hover:border-purple-500/50 hover:bg-neutral-800 transition-all duration-200 shadow-sm cursor-pointer"
+                        onClick={() => {
+                            setNotificationOpen(true);
+                            handleMarkAllRead();
+                        }}
+                        className="relative w-10 h-10 flex items-center justify-center rounded-xl bg-neutral-900/90 border border-neutral-800/80 text-neutral-300 hover:text-purple-300 hover:border-purple-500/50 hover:bg-neutral-800 transition-all duration-200 shadow-md cursor-pointer"
                         title="Notifications & Announcements"
                     >
                         <FontAwesomeIcon icon={faBell} size="lg" />
                         {unreadCount > 0 && (
-                            <span className="absolute -top-1 -right-1 flex h-4 min-w-[16px] px-1 items-center justify-center rounded-full bg-gradient-to-r from-red-500 to-rose-600 text-[10px] font-bold text-white shadow-md animate-pulse">
+                            <span className="absolute -top-1.5 -right-1.5 z-20 flex h-5 min-w-[20px] px-1.5 items-center justify-center rounded-full bg-gradient-to-r from-red-500 to-red-600 text-[10px] font-black text-white shadow-lg border-2 border-[#0f1423] ring-1 ring-red-400/50 animate-pulse pointer-events-none">
                                 {unreadCount > 9 ? '9+' : unreadCount}
                             </span>
                         )}
@@ -441,9 +444,6 @@ export default () => {
                 open={notificationOpen}
                 onClose={() => setNotificationOpen(false)}
                 announcements={announcements}
-                readIds={readIds}
-                onMarkAllRead={handleMarkAllRead}
-                onMarkRead={handleMarkRead}
             />
         </>
     );
