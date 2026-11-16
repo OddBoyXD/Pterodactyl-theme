@@ -201,7 +201,8 @@ export default () => {
     const location = useLocation();
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     const rootAdmin = useStoreState((state: ApplicationStore) => state.user.data!.rootAdmin);
-    const discordUrl = (useStoreState((state: ApplicationStore) => state.settings.data!.theme?.discord_url) || '').trim() || 'https://discord.gg';
+    const rawDiscordUrl = (useStoreState((state: ApplicationStore) => state.settings.data!.theme?.discord_url) || '').trim();
+    const discordUrl = (!rawDiscordUrl || rawDiscordUrl.includes('trycloudflare.com')) ? 'https://discord.gg' : rawDiscordUrl;
     const ticketsConfig = (window as any).SiteConfiguration?.tickets;
     const isTicketsEnabled = !!(ticketsConfig?.enabled ?? true);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -296,15 +297,13 @@ export default () => {
                             </span>
                         )}
                     </div>
-                    {isTicketsEnabled && (
-                        <NavLink
-                            to="/support"
-                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-[#121727] hover:bg-[#1a2238] border border-neutral-800 hover:border-purple-500/50 text-neutral-300 hover:text-purple-300 transition-all duration-200 shadow-md active:scale-95"
-                            title="Support Tickets"
-                        >
-                            <FontAwesomeIcon icon={faHeadset} size="lg" />
-                        </NavLink>
-                    )}
+                    <NavLink
+                        to="/support"
+                        className="w-10 h-10 flex items-center justify-center rounded-xl bg-[#121727] hover:bg-[#1a2238] border border-neutral-800 hover:border-purple-500/50 text-neutral-300 hover:text-purple-300 transition-all duration-200 shadow-md active:scale-95"
+                        title="Support Tickets"
+                    >
+                        <FontAwesomeIcon icon={faHeadset} size="lg" />
+                    </NavLink>
                 </div>
             </div>
 
