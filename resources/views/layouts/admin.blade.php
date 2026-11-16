@@ -532,6 +532,232 @@
                 ::-webkit-scrollbar-thumb:hover {
                     background: rgba(168, 85, 247, 0.65);
                 }
+
+                /* Search Bar Desktop & Global */
+                .box-tools.search01 {
+                    width: 340px;
+                }
+                .box-tools.search01 .input-group {
+                    width: 100%;
+                }
+                .box-tools .input-group input.form-control {
+                    background-color: #080c14 !important;
+                    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+                    color: #f1f5f9 !important;
+                    height: 34px !important;
+                    border-radius: 8px 0 0 8px !important;
+                    box-shadow: none !important;
+                }
+                .box-tools .input-group input.form-control:focus {
+                    border-color: #a855f7 !important;
+                }
+                .box-tools .input-group .input-group-btn > .btn {
+                    height: 34px !important;
+                    padding: 0 14px !important;
+                    display: inline-flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                }
+                .box-tools .input-group .input-group-btn > .btn:first-child {
+                    border-radius: 0 !important;
+                    background: #1e293b !important;
+                    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+                    border-left: none !important;
+                    color: #cbd5e1 !important;
+                }
+                .box-tools .input-group .input-group-btn > a > .btn,
+                .box-tools .input-group .input-group-btn > a.btn {
+                    border-radius: 0 8px 8px 0 !important;
+                    margin-left: -1px !important;
+                }
+
+                /* Mobile Optimization for Admin Panel */
+                @media (max-width: 767px) {
+                    /* Sticky Mobile Header */
+                    header.main-header {
+                        position: sticky !important;
+                        top: 0 !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: space-between !important;
+                        height: 50px !important;
+                        z-index: 1030 !important;
+                    }
+                    header.main-header .logo {
+                        width: auto !important;
+                        float: none !important;
+                        height: 50px !important;
+                        line-height: 50px !important;
+                        padding: 0 12px !important;
+                        border-right: none !important;
+                        border-bottom: none !important;
+                        font-size: 15px !important;
+                        flex-shrink: 0 !important;
+                    }
+                    header.main-header .navbar {
+                        margin: 0 !important;
+                        height: 50px !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: flex-end !important;
+                        flex: 1 !important;
+                    }
+                    header.main-header .sidebar-toggle {
+                        width: 44px !important;
+                        height: 50px !important;
+                        display: inline-flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        float: left !important;
+                    }
+                    header.main-header .navbar-custom-menu {
+                        float: none !important;
+                    }
+                    header.main-header .navbar-nav {
+                        margin: 0 !important;
+                        display: flex !important;
+                        flex-direction: row !important;
+                        align-items: center !important;
+                    }
+                    header.main-header .navbar-nav > li > a {
+                        padding: 14px 10px !important;
+                    }
+
+                    /* Content Header & Breadcrumbs */
+                    .content-header {
+                        padding: 14px 12px 6px !important;
+                    }
+                    .content-header > h1 {
+                        font-size: 18px !important;
+                        margin-bottom: 4px !important;
+                    }
+                    .content-header > h1 > small {
+                        display: block !important;
+                        font-size: 11.5px !important;
+                        margin-top: 2px !important;
+                    }
+                    .content-header > .breadcrumb {
+                        position: static !important;
+                        float: none !important;
+                        margin-top: 6px !important;
+                        padding: 0 !important;
+                        font-size: 11px !important;
+                    }
+
+                    /* Content & Boxes */
+                    .content {
+                        padding: 8px 8px 24px !important;
+                    }
+                    .box {
+                        border-radius: 12px !important;
+                        margin-bottom: 14px !important;
+                        overflow: hidden !important;
+                    }
+
+                    /* Box Header & Search Bar on Mobile */
+                    .box-header {
+                        display: flex !important;
+                        flex-direction: column !important;
+                        align-items: stretch !important;
+                        gap: 12px !important;
+                        padding: 14px 12px !important;
+                        position: relative !important;
+                    }
+                    .box-header > .box-title {
+                        display: block !important;
+                        float: none !important;
+                        font-size: 16px !important;
+                        font-weight: 700 !important;
+                        margin-bottom: 0 !important;
+                    }
+                    .box-header > .box-tools,
+                    .box-tools.search01 {
+                        position: static !important;
+                        float: none !important;
+                        width: 100% !important;
+                        margin: 0 !important;
+                        right: auto !important;
+                        top: auto !important;
+                    }
+                    .box-header > .box-tools form {
+                        width: 100% !important;
+                        margin: 0 !important;
+                    }
+                    .box-header > .box-tools .input-group {
+                        width: 100% !important;
+                        display: flex !important;
+                    }
+                    .box-header > .box-tools .input-group input.form-control {
+                        width: 100% !important;
+                        flex: 1 1 auto !important;
+                        height: 38px !important;
+                        font-size: 13.5px !important;
+                        border-radius: 8px 0 0 8px !important;
+                    }
+                    .box-header > .box-tools .input-group-btn {
+                        display: flex !important;
+                        width: auto !important;
+                        white-space: nowrap !important;
+                    }
+                    .box-header > .box-tools .input-group-btn > .btn,
+                    .box-header > .box-tools .input-group-btn > a > .btn,
+                    .box-header > .box-tools .input-group-btn > a.btn {
+                        height: 38px !important;
+                        padding: 0 14px !important;
+                        display: inline-flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        font-size: 12.5px !important;
+                    }
+                    .box-header > .box-tools .input-group-btn > .btn:first-child {
+                        border-radius: 0 !important;
+                    }
+                    .box-header > .box-tools .input-group-btn > a > .btn,
+                    .box-header > .box-tools .input-group-btn > a.btn {
+                        border-radius: 0 8px 8px 0 !important;
+                    }
+
+                    /* Tables Responsiveness: Smooth horizontal scroll & no squishing */
+                    .table-responsive {
+                        border: none !important;
+                        width: 100% !important;
+                        overflow-x: auto !important;
+                        -webkit-overflow-scrolling: touch !important;
+                    }
+                    .table-responsive > .table {
+                        min-width: 600px !important;
+                        margin-bottom: 0 !important;
+                    }
+                    .table-responsive > .table th,
+                    .table-responsive > .table td {
+                        white-space: nowrap !important;
+                        padding: 10px 12px !important;
+                        font-size: 12.5px !important;
+                    }
+
+                    /* Grids and Columns */
+                    .col-xs-12, .col-sm-12 {
+                        padding-left: 4px !important;
+                        padding-right: 4px !important;
+                    }
+                    .row {
+                        margin-left: -4px !important;
+                        margin-right: -4px !important;
+                    }
+
+                    /* Pagination on Mobile */
+                    .box-footer .pagination {
+                        margin: 8px 0 !important;
+                        display: inline-flex !important;
+                        flex-wrap: wrap !important;
+                        justify-content: center !important;
+                    }
+                    .box-footer .pagination > li > a,
+                    .box-footer .pagination > li > span {
+                        padding: 6px 10px !important;
+                        font-size: 12px !important;
+                    }
+                }
             </style>
 
             <!--[if lt IE 9]>
