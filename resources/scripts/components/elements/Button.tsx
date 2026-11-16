@@ -10,7 +10,7 @@ interface Props {
     isSecondary?: boolean;
 }
 
-const ButtonStyle = styled.button<Omit<Props, 'isLoading'>`
+const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     ${tw`relative inline-flex items-center justify-center rounded-xl p-2 font-bold tracking-wide text-xs uppercase transition-all duration-200 border shadow-md active:scale-95`};
 
     ${(props) =>
