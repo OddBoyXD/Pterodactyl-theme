@@ -37,8 +37,10 @@ export const NotificationDrawer: React.FC<Props> = ({
         return null;
     }
 
-    const unreadCount = announcements.filter((a) => !readIds.includes(a.id)).length;
-    const displayed = filter === "unread" ? announcements.filter((a) => !readIds.includes(a.id)) : announcements;
+    const list = Array.isArray(announcements) ? announcements : [];
+    const safeReadIds = Array.isArray(readIds) ? readIds : [];
+    const unreadCount = list.filter((a) => !safeReadIds.includes(a.id)).length;
+    const displayed = filter === "unread" ? list.filter((a) => !safeReadIds.includes(a.id)) : list;
 
     const getCategoryBadge = (category: string) => {
         switch (category) {
@@ -132,7 +134,7 @@ export const NotificationDrawer: React.FC<Props> = ({
                                     : "text-neutral-400 hover:text-white hover:bg-neutral-800"
                             }`}
                         >
-                            All ({announcements.length})
+                            All ({list.length})
                         </button>
                         <button
                             onClick={() => setFilter("unread")}

@@ -148,19 +148,56 @@ const ServerSidebarLinksInner = ({ match, rootAdmin, setSidebarOpen }: { match: 
                         content
                     );
                 })}
-            <NotificationDrawer
-                open={notificationOpen}
-                onClose={() => setNotificationOpen(false)}
-                announcements={announcements}
-                readIds={readIds}
-                onMarkAllRead={handleMarkAllRead}
-                onMarkRead={handleMarkRead}
-            />
+
         </>
     );
 };
 
 export default () => {
+    const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+    const [notificationOpen, setNotificationOpen] = useState(false);
+    const [readIds, setReadIds] = useState<number[]>(() => {
+        try {
+            const saved = localStorage.getItem('ptero_read_announcements');
+            return saved ? JSON.parse(saved) : [];
+        } catch {
+            return [];
+        }
+    });
+
+    useEffect(() => {
+        getAnnouncements()
+            .then((data) => setAnnouncements(Array.isArray(data) ? data : []))
+            .catch(() => setAnnouncements([]));
+
+        const interval = setInterval(() => {
+            getAnnouncements()
+                .then((data) => setAnnouncements(Array.isArray(data) ? data : []))
+                .catch(() => {});
+        }, 60000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const handleMarkAllRead = () => {
+        const allIds = (announcements || []).map((a) => a.id);
+        setReadIds(allIds);
+        try {
+            localStorage.setItem('ptero_read_announcements', JSON.stringify(allIds));
+        } catch {}
+    };
+
+    const handleMarkRead = (id: number) => {
+        if (!readIds.includes(id)) {
+            const next = [...readIds, id];
+            setReadIds(next);
+            try {
+                localStorage.setItem('ptero_read_announcements', JSON.stringify(next));
+            } catch {}
+        }
+    };
+
+    const unreadCount = (announcements || []).filter((a) => !readIds.includes(a.id)).length;
     const location = useLocation();
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     const rootAdmin = useStoreState((state: ApplicationStore) => state.user.data!.rootAdmin);
