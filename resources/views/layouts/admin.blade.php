@@ -77,11 +77,32 @@
                     -webkit-text-fill-color: transparent;
                 }
                 header.main-header .sidebar-toggle {
-                    color: #94a3b8 !important;
+                    float: left !important;
+                    display: inline-flex !important;
+                    align-items: center;
+                    justify-content: center;
+                    width: 50px !important;
+                    height: 50px !important;
+                    padding: 0 !important;
+                    text-decoration: none !important;
+                    background: transparent !important;
+                    transition: all 0.2s ease;
+                }
+                header.main-header .sidebar-toggle:before {
+                    display: none !important;
+                }
+                header.main-header .sidebar-toggle .fa-bars {
+                    color: #c084fc !important;
+                    font-size: 16px !important;
+                    line-height: 1 !important;
+                    transition: transform 0.2s ease, color 0.2s ease;
                 }
                 header.main-header .sidebar-toggle:hover {
-                    background: rgba(255, 255, 255, 0.05) !important;
-                    color: #fff !important;
+                    background: rgba(192, 132, 252, 0.12) !important;
+                }
+                header.main-header .sidebar-toggle:hover .fa-bars {
+                    color: #e9d5ff !important;
+                    transform: scale(1.12);
                 }
                 header.main-header .navbar-nav > li > a {
                     color: #94a3b8 !important;
@@ -527,10 +548,8 @@
                 </a>
                 <nav class="navbar navbar-static-top">
                     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
                         <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
