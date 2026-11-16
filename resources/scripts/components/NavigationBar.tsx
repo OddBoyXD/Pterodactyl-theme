@@ -19,6 +19,7 @@ import {
     faTimes,
     faUser,
     faBell,
+    faBullhorn,
     faSun,
     faMoon,
     faHeadset,
@@ -40,6 +41,8 @@ import {
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import SearchContainer from '@/components/dashboard/search/SearchContainer';
+import getAnnouncements, { Announcement } from '@/api/getAnnouncements';
+import NotificationDrawer from '@/components/dashboard/NotificationDrawer';
 import tw, { theme } from 'twin.macro';
 import styled from 'styled-components/macro';
 import http from '@/api/http';
@@ -145,6 +148,14 @@ const ServerSidebarLinksInner = ({ match, rootAdmin, setSidebarOpen }: { match: 
                         content
                     );
                 })}
+            <NotificationDrawer
+                open={notificationOpen}
+                onClose={() => setNotificationOpen(false)}
+                announcements={announcements}
+                readIds={readIds}
+                onMarkAllRead={handleMarkAllRead}
+                onMarkRead={handleMarkRead}
+            />
         </>
     );
 };
@@ -224,9 +235,19 @@ export default () => {
                             <DiscordIcon />
                         </a>
                     )}
-                    <NavLink to="/account/activity" className="w-10 h-10 flex items-center justify-center rounded-xl bg-neutral-900/90 border border-neutral-800/80 text-neutral-400 hover:text-purple-300 hover:border-purple-500/50 hover:bg-neutral-800 transition-all duration-200 shadow-sm" title="Activity / Notifications">
+                    <button
+                        type="button"
+                        onClick={() => setNotificationOpen(true)}
+                        className="relative w-10 h-10 flex items-center justify-center rounded-xl bg-neutral-900/90 border border-neutral-800/80 text-neutral-400 hover:text-purple-300 hover:border-purple-500/50 hover:bg-neutral-800 transition-all duration-200 shadow-sm cursor-pointer"
+                        title="Notifications & Announcements"
+                    >
                         <FontAwesomeIcon icon={faBell} size="lg" />
-                    </NavLink>
+                        {unreadCount > 0 && (
+                            <span className="absolute -top-1 -right-1 flex h-4 min-w-[16px] px-1 items-center justify-center rounded-full bg-gradient-to-r from-red-500 to-rose-600 text-[10px] font-bold text-white shadow-md animate-pulse">
+                                {unreadCount > 9 ? '9+' : unreadCount}
+                            </span>
+                        )}
+                    </button>
                     <NavLink to="/support" className="w-10 h-10 flex items-center justify-center rounded-xl bg-neutral-900/90 border border-neutral-800/80 text-neutral-400 hover:text-purple-300 hover:border-purple-500/50 hover:bg-neutral-800 transition-all duration-200 shadow-sm" title="Support Tickets">
                         <FontAwesomeIcon icon={faHeadset} size="lg" />
                     </NavLink>
@@ -328,6 +349,10 @@ export default () => {
                                         pluginsOpen ? 'max-h-96 opacity-100 py-1.5' : 'max-h-0 opacity-0'
                                     }`}
                                 >
+                                    <SidebarAnchor href="/admin/announcements" rel="noreferrer" css={tw`text-xs py-1.5 px-3 hover:text-pink-400`}>
+                                        <FontAwesomeIcon icon={faBullhorn} css={tw`w-4 mr-3 text-pink-400`} />
+                                        <span>Announcements</span>
+                                    </SidebarAnchor>
                                     <SidebarAnchor href="/admin/theme" rel="noreferrer" css={tw`text-xs py-1.5 px-3 hover:text-cyan-400`}>
                                         <FontAwesomeIcon icon={faPaintBrush} css={tw`w-4 mr-3 text-cyan-400`} />
                                         <span>Theme Settings</span>
@@ -374,6 +399,15 @@ export default () => {
                     </SidebarButton>
                 </div>
             </div>
+
+            <NotificationDrawer
+                open={notificationOpen}
+                onClose={() => setNotificationOpen(false)}
+                announcements={announcements}
+                readIds={readIds}
+                onMarkAllRead={handleMarkAllRead}
+                onMarkRead={handleMarkRead}
+            />
         </>
     );
 };

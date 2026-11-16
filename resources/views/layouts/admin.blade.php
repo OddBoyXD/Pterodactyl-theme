@@ -601,11 +601,16 @@
                                     <span style="font-weight: 700; letter-spacing: 0.5px;">PTERO PLUGINS</span>
                                 </div>
                                 <span class="pull-right-container" style="display: flex; align-items: center; gap: 8px;">
-                                    <span class="label pull-right ptero-counter-badge">8</span>
+                                    <span class="label pull-right ptero-counter-badge">9</span>
                                     <i class="fa fa-chevron-left pull-right ptero-chevron" style="font-size: 11px; {{ $isPluginsActive ? 'transform: rotate(-90deg);' : '' }}"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu ptero-submenu" id="ptero-plugins-submenu" style="{{ $isPluginsActive ? 'display: block;' : 'display: none;' }}">
+                                <li class="{{ starts_with(Route::currentRouteName(), 'admin.announcements') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.announcements') }}">
+                                        <i class="fa fa-bullhorn" style="color: #f43f5e; width: 18px;"></i> <span>Announcements</span>
+                                    </a>
+                                </li>
                                 <li class="{{ Route::currentRouteName() === 'admin.theme' ? 'active' : '' }}">
                                     <a href="{{ route('admin.theme') }}">
                                         <i class="fa fa-paint-brush" style="color: #38bdf8; width: 18px;"></i> <span>Theme Settings</span>

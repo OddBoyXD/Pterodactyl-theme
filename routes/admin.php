@@ -81,6 +81,12 @@ Route::group(['prefix' => 'settings'], function () {
     Route::patch('/backups', [Admin\Settings\BackupController::class, 'update']);
 });
 
+Route::get('/announcements', [Admin\Settings\AnnouncementsController::class, 'index'])->name('admin.announcements');
+Route::post('/announcements', [Admin\Settings\AnnouncementsController::class, 'store'])->name('admin.announcements.store');
+Route::post('/announcements/{announcement}/toggle', [Admin\Settings\AnnouncementsController::class, 'toggle'])->name('admin.announcements.toggle');
+Route::post('/announcements/{announcement}/update', [Admin\Settings\AnnouncementsController::class, 'update'])->name('admin.announcements.update');
+Route::delete('/announcements/{announcement}', [Admin\Settings\AnnouncementsController::class, 'destroy'])->name('admin.announcements.delete');
+
 Route::get('/theme', [Admin\Settings\ThemeController::class, 'index'])->name('admin.theme');
 Route::patch('/theme', [Admin\Settings\ThemeController::class, 'update']);
 
