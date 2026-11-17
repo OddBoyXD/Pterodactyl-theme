@@ -72,6 +72,7 @@ files=(
   "database/migrations/2026_05_31_110000_add_subdomain_limit_to_servers_table.php"
   "app/Services/Servers/BuildModificationService.php"
   "app/Http/Controllers/Admin/ServersController.php"
+  "app/Http/Controllers/Admin/NodesController.php"
   "resources/views/admin/servers/view/build.blade.php"
   "app/Transformers/Api/Client/ServerTransformer.php"
   "resources/scripts/api/server/getServer.ts"

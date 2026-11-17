@@ -573,55 +573,7 @@
 
                 /* Mobile Optimization for Admin Panel */
                 @media (max-width: 767px) {
-                    /* Sticky Mobile Header */
-                    header.main-header {
-                        position: sticky !important;
-                        top: 0 !important;
-                        display: flex !important;
-                        align-items: center !important;
-                        justify-content: space-between !important;
-                        height: 50px !important;
-                        z-index: 1030 !important;
-                    }
-                    header.main-header .logo {
-                        width: auto !important;
-                        float: none !important;
-                        height: 50px !important;
-                        line-height: 50px !important;
-                        padding: 0 12px !important;
-                        border-right: none !important;
-                        border-bottom: none !important;
-                        font-size: 15px !important;
-                        flex-shrink: 0 !important;
-                    }
-                    header.main-header .navbar {
-                        margin: 0 !important;
-                        height: 50px !important;
-                        display: flex !important;
-                        align-items: center !important;
-                        justify-content: flex-end !important;
-                        flex: 1 !important;
-                    }
-                    header.main-header .sidebar-toggle {
-                        width: 44px !important;
-                        height: 50px !important;
-                        display: inline-flex !important;
-                        align-items: center !important;
-                        justify-content: center !important;
-                        float: left !important;
-                    }
-                    header.main-header .navbar-custom-menu {
-                        float: none !important;
-                    }
-                    header.main-header .navbar-nav {
-                        margin: 0 !important;
-                        display: flex !important;
-                        flex-direction: row !important;
-                        align-items: center !important;
-                    }
-                    header.main-header .navbar-nav > li > a {
-                        padding: 14px 10px !important;
-                    }
+                    /* Mobile Header and Layout handled in Unified Section */
 
                     /* Content Header & Breadcrumbs */
                     .content-header {
@@ -824,7 +776,7 @@
                     }
                 }
 
-                /* Mobile (< 768px) */
+                                /* Mobile (< 768px) */
                 @media (max-width: 767px) {
                     /* Fix content-wrapper from translating off-screen */
                     .content-wrapper,
@@ -859,50 +811,56 @@
                         border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
                     }
 
-                    /* Force Hamburger Button on the LEFT */
                     header.main-header .navbar {
-                        display: contents !important;
+                        display: flex !important;
+                        flex-direction: row !important;
+                        align-items: center !important;
+                        justify-content: space-between !important;
+                        flex: 1 !important;
+                        height: 52px !important;
+                        margin: 0 !important;
+                        background: transparent !important;
                     }
+
                     header.main-header .sidebar-toggle {
-                        order: 1 !important;
-                        width: 40px !important;
-                        height: 40px !important;
+                        width: 42px !important;
+                        height: 42px !important;
                         display: flex !important;
                         align-items: center !important;
                         justify-content: center !important;
-                        border-radius: 10px !important;
-                        background: rgba(168, 85, 247, 0.12) !important;
-                        border: 1px solid rgba(168, 85, 247, 0.3) !important;
+                        border-radius: 8px !important;
+                        background: rgba(99, 102, 241, 0.15) !important;
+                        border: 1px solid rgba(99, 102, 241, 0.3) !important;
                         cursor: pointer !important;
                         margin: 0 !important;
                         padding: 0 !important;
+                        touch-action: manipulation !important;
+                        -webkit-tap-highlight-color: transparent !important;
                     }
                     header.main-header .sidebar-toggle .fa-bars {
-                        color: #c084fc !important;
-                        font-size: 16px !important;
+                        color: #a5b4fc !important;
+                        font-size: 18px !important;
+                        pointer-events: none !important;
                     }
 
                     /* Center Brand Logo */
                     header.main-header .logo {
-                        order: 2 !important;
                         width: auto !important;
                         height: 52px !important;
                         line-height: 52px !important;
                         padding: 0 10px !important;
-                        font-size: 15px !important;
+                        font-size: 16px !important;
+                        font-weight: 700 !important;
                         border: none !important;
                         background: transparent !important;
                         margin: 0 !important;
-                        text-align: center !important;
-                        flex: 1 !important;
+                        color: #ffffff !important;
                         display: flex !important;
                         align-items: center !important;
-                        justify-content: center !important;
                     }
 
                     /* User Menu on the RIGHT */
                     header.main-header .navbar-custom-menu {
-                        order: 3 !important;
                         margin: 0 !important;
                         padding: 0 !important;
                     }
@@ -936,7 +894,7 @@
                         -webkit-overflow-scrolling: touch !important;
                         -webkit-transform: translateX(-100%) !important;
                         transform: translateX(-100%) !important;
-                        transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
                         box-shadow: none !important;
                     }
 
@@ -944,7 +902,7 @@
                     body.sidebar-open aside.main-sidebar {
                         -webkit-transform: translateX(0) !important;
                         transform: translateX(0) !important;
-                        box-shadow: 12px 0 40px rgba(0, 0, 0, 0.85) !important;
+                        box-shadow: 14px 0 45px rgba(0, 0, 0, 0.9) !important;
                     }
 
                     /* Prevent body scrolling when drawer is open */
@@ -1256,19 +1214,19 @@
                 });
             </script>
         
-                        <script>
+                                    <script>
                 $(function () {
-                    // Mobile & Desktop Sidebar Toggle Handler
+                    // Fast Mobile & Desktop Sidebar Toggle Handler
                     $(document).on('click', '.sidebar-toggle', function(e) {
                         e.preventDefault();
                         e.stopPropagation();
                         if ($(window).width() < 768) {
                             if ($('body').hasClass('sidebar-open')) {
                                 $('body').removeClass('sidebar-open');
-                                $('#sidebar-mobile-backdrop').fadeOut(200);
+                                $('#sidebar-mobile-backdrop').fadeOut(180);
                             } else {
                                 $('body').addClass('sidebar-open');
-                                $('#sidebar-mobile-backdrop').fadeIn(200);
+                                $('#sidebar-mobile-backdrop').fadeIn(180);
                             }
                         } else {
                             $('body').toggleClass('sidebar-collapse');
@@ -1276,17 +1234,17 @@
                     });
 
                     // Backdrop tap closes mobile drawer
-                    $(document).on('click', '#sidebar-mobile-backdrop', function(e) {
+                    $(document).on('click touchstart', '#sidebar-mobile-backdrop', function(e) {
                         e.preventDefault();
                         $('body').removeClass('sidebar-open');
-                        $('#sidebar-mobile-backdrop').fadeOut(200);
+                        $('#sidebar-mobile-backdrop').fadeOut(180);
                     });
 
                     // Nav item click closes drawer on mobile
                     $(document).on('click', 'aside.main-sidebar .sidebar-menu a', function() {
                         if ($(window).width() < 768 && !$(this).hasClass('ptero-toggle-btn')) {
                             $('body').removeClass('sidebar-open');
-                            $('#sidebar-mobile-backdrop').fadeOut(200);
+                            $('#sidebar-mobile-backdrop').fadeOut(180);
                         }
                     });
 
@@ -1294,7 +1252,7 @@
                     $(document).on('keydown', function(e) {
                         if (e.key === 'Escape' && $('body').hasClass('sidebar-open')) {
                             $('body').removeClass('sidebar-open');
-                            $('#sidebar-mobile-backdrop').fadeOut(200);
+                            $('#sidebar-mobile-backdrop').fadeOut(180);
                         }
                     });
                 });
