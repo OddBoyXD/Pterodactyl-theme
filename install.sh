@@ -119,6 +119,7 @@ files=(
   "resources/views/admin/nodes/view/configuration.blade.php"
   "resources/views/admin/nodes/view/index.blade.php"
   "resources/views/admin/nodes/index.blade.php"
+  "resources/views/admin/nodes/new.blade.php"
   "app/Http/Controllers/Auth/DiscordController.php"
   "app/Http/Middleware/VerifyReCaptcha.php"
   "app/Http/Requests/Admin/Settings/AdvancedSettingsFormRequest.php"
