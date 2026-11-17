@@ -953,57 +953,43 @@
                     }
                 }
 
+
+                /* Responsive Mobile Tabs for Admin views (Nodes, Servers, Settings) */
+                @media (max-width: 767px) {
+                    .nav-tabs-custom > .nav-tabs,
+                    .nav-tabs-floating > .nav-tabs {
+                        display: flex !important;
+                        flex-wrap: nowrap !important;
+                        overflow-x: auto !important;
+                        -webkit-overflow-scrolling: touch !important;
+                        scrollbar-width: none !important;
+                        -ms-overflow-style: none !important;
+                        border-bottom: 2px solid rgba(255, 255, 255, 0.08) !important;
+                        padding-bottom: 2px !important;
+                    }
+                    .nav-tabs-custom > .nav-tabs::-webkit-scrollbar,
+                    .nav-tabs-floating > .nav-tabs::-webkit-scrollbar {
+                        display: none !important;
+                    }
+                    .nav-tabs-custom > .nav-tabs > li,
+                    .nav-tabs-floating > .nav-tabs > li {
+                        flex: 0 0 auto !important;
+                        float: none !important;
+                        white-space: nowrap !important;
+                    }
+                    .nav-tabs-custom > .nav-tabs > li > a,
+                    .nav-tabs-floating > .nav-tabs > li > a {
+                        padding: 10px 14px !important;
+                        font-size: 13px !important;
+                    }
+                }
+
             </style>
 
             <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
             <![endif]-->
-        
-            <script>
-                $(function () {
-                    // Mobile & Desktop Sidebar Toggle Handler
-                    $(document).on(click, .sidebar-toggle, function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        if ($(window).width() < 768) {
-                            if ($(body).hasClass(sidebar-open)) {
-                                $(body).removeClass(sidebar-open);
-                                $(#sidebar-mobile-backdrop).fadeOut(200);
-                            } else {
-                                $(body).addClass(sidebar-open);
-                                $(#sidebar-mobile-backdrop).fadeIn(200);
-                            }
-                        } else {
-                            $(body).toggleClass(sidebar-collapse);
-                        }
-                    });
-
-                    // Backdrop tap closes mobile drawer
-                    $(document).on(click, #sidebar-mobile-backdrop, function(e) {
-                        e.preventDefault();
-                        $(body).removeClass(sidebar-open);
-                        $(#sidebar-mobile-backdrop).fadeOut(200);
-                    });
-
-                    // Nav item click closes drawer on mobile
-                    $(document).on(click, aside.main-sidebar .sidebar-menu a, function() {
-                        if ($(window).width() < 768 && !$(this).hasClass(ptero-toggle-btn)) {
-                            $(body).removeClass(sidebar-open);
-                            $(#sidebar-mobile-backdrop).fadeOut(200);
-                        }
-                    });
-
-                    // ESC key closes drawer
-                    $(document).on(keydown, function(e) {
-                        if (e.key === Escape && $(body).hasClass(sidebar-open)) {
-                            $(body).removeClass(sidebar-open);
-                            $(#sidebar-mobile-backdrop).fadeOut(200);
-                        }
-                    });
-                });
-            </script>
-
         @show
     </head>
     <body class="hold-transition skin-blue fixed sidebar-mini">
@@ -1270,45 +1256,45 @@
                 });
             </script>
         
-            <script>
+                        <script>
                 $(function () {
                     // Mobile & Desktop Sidebar Toggle Handler
-                    $(document).on(click, .sidebar-toggle, function(e) {
+                    $(document).on('click', '.sidebar-toggle', function(e) {
                         e.preventDefault();
                         e.stopPropagation();
                         if ($(window).width() < 768) {
-                            if ($(body).hasClass(sidebar-open)) {
-                                $(body).removeClass(sidebar-open);
-                                $(#sidebar-mobile-backdrop).fadeOut(200);
+                            if ($('body').hasClass('sidebar-open')) {
+                                $('body').removeClass('sidebar-open');
+                                $('#sidebar-mobile-backdrop').fadeOut(200);
                             } else {
-                                $(body).addClass(sidebar-open);
-                                $(#sidebar-mobile-backdrop).fadeIn(200);
+                                $('body').addClass('sidebar-open');
+                                $('#sidebar-mobile-backdrop').fadeIn(200);
                             }
                         } else {
-                            $(body).toggleClass(sidebar-collapse);
+                            $('body').toggleClass('sidebar-collapse');
                         }
                     });
 
                     // Backdrop tap closes mobile drawer
-                    $(document).on(click, #sidebar-mobile-backdrop, function(e) {
+                    $(document).on('click', '#sidebar-mobile-backdrop', function(e) {
                         e.preventDefault();
-                        $(body).removeClass(sidebar-open);
-                        $(#sidebar-mobile-backdrop).fadeOut(200);
+                        $('body').removeClass('sidebar-open');
+                        $('#sidebar-mobile-backdrop').fadeOut(200);
                     });
 
                     // Nav item click closes drawer on mobile
-                    $(document).on(click, aside.main-sidebar .sidebar-menu a, function() {
-                        if ($(window).width() < 768 && !$(this).hasClass(ptero-toggle-btn)) {
-                            $(body).removeClass(sidebar-open);
-                            $(#sidebar-mobile-backdrop).fadeOut(200);
+                    $(document).on('click', 'aside.main-sidebar .sidebar-menu a', function() {
+                        if ($(window).width() < 768 && !$(this).hasClass('ptero-toggle-btn')) {
+                            $('body').removeClass('sidebar-open');
+                            $('#sidebar-mobile-backdrop').fadeOut(200);
                         }
                     });
 
                     // ESC key closes drawer
-                    $(document).on(keydown, function(e) {
-                        if (e.key === Escape && $(body).hasClass(sidebar-open)) {
-                            $(body).removeClass(sidebar-open);
-                            $(#sidebar-mobile-backdrop).fadeOut(200);
+                    $(document).on('keydown', function(e) {
+                        if (e.key === 'Escape' && $('body').hasClass('sidebar-open')) {
+                            $('body').removeClass('sidebar-open');
+                            $('#sidebar-mobile-backdrop').fadeOut(200);
                         }
                     });
                 });
