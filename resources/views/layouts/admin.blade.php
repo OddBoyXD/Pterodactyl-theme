@@ -715,7 +715,7 @@
                 /* FLAWLESS RESPONSIVE DESKTOP & MOBILE SIDEBAR FIX          */
                 /* ========================================================= */
 
-                /* Desktop (min-width: 768px) */
+                                /* Desktop Header & Sidebar (>= 768px) */
                 @media (min-width: 768px) {
                     header.main-header {
                         position: fixed !important;
@@ -725,19 +725,56 @@
                         height: 52px !important;
                         z-index: 1030 !important;
                         background: #090c13 !important;
+                        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        padding: 0 !important;
                     }
                     header.main-header .logo {
+                        order: 1 !important;
                         width: 250px !important;
                         height: 52px !important;
                         line-height: 52px !important;
-                        float: left !important;
+                        padding: 0 16px !important;
+                        font-size: 16px !important;
+                        font-weight: 700 !important;
+                        color: #ffffff !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+                        background: transparent !important;
+                        text-align: left !important;
+                        flex-shrink: 0 !important;
                     }
-                    header.main-header .navbar {
-                        margin-left: 250px !important;
+                    header.main-header .sidebar-toggle {
+                        order: 2 !important;
+                        width: 48px !important;
                         height: 52px !important;
                         display: flex !important;
                         align-items: center !important;
-                        justify-content: space-between !important;
+                        justify-content: center !important;
+                        color: #a5b4fc !important;
+                        font-size: 17px !important;
+                        cursor: pointer !important;
+                        background: transparent !important;
+                        border: none !important;
+                        transition: all 0.15s ease !important;
+                        flex-shrink: 0 !important;
+                    }
+                    header.main-header .sidebar-toggle:hover {
+                        color: #ffffff !important;
+                        background: rgba(255, 255, 255, 0.06) !important;
+                    }
+                    header.main-header .navbar {
+                        order: 3 !important;
+                        flex: 1 !important;
+                        height: 52px !important;
+                        margin-left: 0 !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: flex-end !important;
+                        background: transparent !important;
+                        padding-right: 15px !important;
                     }
                     aside.main-sidebar {
                         width: 250px !important;
@@ -768,21 +805,20 @@
                     body.sidebar-collapse .main-footer {
                         margin-left: 50px !important;
                     }
-                    body.sidebar-collapse header.main-header .navbar {
-                        margin-left: 50px !important;
-                    }
                     body.sidebar-collapse header.main-header .logo {
                         width: 50px !important;
+                        overflow: hidden !important;
+                        padding: 0 10px !important;
                     }
                 }
 
-                                /* Mobile (< 768px) */
+                /* Mobile Header & Sidebar (< 768px) */
                 @media (max-width: 767px) {
                     /* Fix content-wrapper from translating off-screen */
                     .content-wrapper,
                     .main-footer,
-                    .sidebar-open .content-wrapper,
-                    .sidebar-open .main-footer {
+                    body.sidebar-open .content-wrapper,
+                    body.sidebar-open .main-footer {
                         -webkit-transform: none !important;
                         -ms-transform: none !important;
                         transform: none !important;
@@ -806,60 +842,65 @@
                         align-items: center !important;
                         justify-content: space-between !important;
                         z-index: 1040 !important;
-                        padding: 0 8px !important;
+                        padding: 0 10px !important;
                         background: #090c13 !important;
                         border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
                     }
 
-                    header.main-header .navbar {
-                        display: flex !important;
-                        flex-direction: row !important;
-                        align-items: center !important;
-                        justify-content: space-between !important;
-                        flex: 1 !important;
-                        height: 52px !important;
-                        margin: 0 !important;
-                        background: transparent !important;
-                    }
-
+                    /* Hamburger is ON THE FAR LEFT (order: 1) */
                     header.main-header .sidebar-toggle {
-                        width: 42px !important;
-                        height: 42px !important;
+                        order: 1 !important;
+                        width: 40px !important;
+                        height: 40px !important;
                         display: flex !important;
                         align-items: center !important;
                         justify-content: center !important;
                         border-radius: 8px !important;
-                        background: rgba(99, 102, 241, 0.15) !important;
-                        border: 1px solid rgba(99, 102, 241, 0.3) !important;
+                        background: rgba(99, 102, 241, 0.16) !important;
+                        border: 1px solid rgba(99, 102, 241, 0.35) !important;
+                        color: #c7d2fe !important;
+                        font-size: 18px !important;
                         cursor: pointer !important;
+                        flex-shrink: 0 !important;
                         margin: 0 !important;
                         padding: 0 !important;
-                        touch-action: manipulation !important;
-                        -webkit-tap-highlight-color: transparent !important;
                     }
                     header.main-header .sidebar-toggle .fa-bars {
-                        color: #a5b4fc !important;
-                        font-size: 18px !important;
                         pointer-events: none !important;
                     }
 
-                    /* Center Brand Logo */
+                    /* Logo / Panel Title is in the CENTER (order: 2) */
                     header.main-header .logo {
-                        width: auto !important;
-                        height: 52px !important;
-                        line-height: 52px !important;
-                        padding: 0 10px !important;
+                        order: 2 !important;
+                        flex: 1 !important;
+                        text-align: center !important;
                         font-size: 16px !important;
                         font-weight: 700 !important;
-                        border: none !important;
-                        background: transparent !important;
-                        margin: 0 !important;
                         color: #ffffff !important;
+                        height: 52px !important;
+                        line-height: 52px !important;
                         display: flex !important;
                         align-items: center !important;
+                        justify-content: center !important;
+                        border: none !important;
+                        background: transparent !important;
+                        padding: 0 8px !important;
+                        margin: 0 !important;
+                        overflow: hidden !important;
+                        white-space: nowrap !important;
+                        text-overflow: ellipsis !important;
                     }
 
-                    /* User Menu on the RIGHT */
+                    /* User icons on the FAR RIGHT (order: 3) */
+                    header.main-header .navbar {
+                        order: 3 !important;
+                        margin: 0 !important;
+                        background: transparent !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        flex-shrink: 0 !important;
+                        height: 52px !important;
+                    }
                     header.main-header .navbar-custom-menu {
                         margin: 0 !important;
                         padding: 0 !important;
@@ -868,16 +909,16 @@
                         display: flex !important;
                         flex-direction: row !important;
                         align-items: center !important;
-                        gap: 4px !important;
+                        gap: 2px !important;
                         margin: 0 !important;
                     }
                     header.main-header .navbar-custom-menu .navbar-nav > li > a {
-                        padding: 8px 10px !important;
+                        padding: 6px 8px !important;
                         display: flex !important;
                         align-items: center !important;
                     }
 
-                    /* Mobile Slide-Out Drawer (LEFT SIDE) */
+                    /* Sidebar Drawer: Left off-canvas */
                     aside.main-sidebar {
                         position: fixed !important;
                         top: 0 !important;
@@ -886,23 +927,24 @@
                         width: 275px !important;
                         max-width: 82vw !important;
                         height: 100vh !important;
-                        padding-top: 54px !important;
-                        background: #090c13 !important;
+                        padding-top: 56px !important;
+                        background: #0d111a !important;
                         border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
                         z-index: 1060 !important;
                         overflow-y: auto !important;
                         -webkit-overflow-scrolling: touch !important;
-                        -webkit-transform: translateX(-100%) !important;
-                        transform: translateX(-100%) !important;
-                        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                        transform: translate3d(-100%, 0, 0) !important;
+                        -webkit-transform: translate3d(-100%, 0, 0) !important;
+                        transition: transform 0.28s ease !important;
+                        -webkit-transition: -webkit-transform 0.28s ease !important;
                         box-shadow: none !important;
                     }
 
                     /* Open Drawer state */
                     body.sidebar-open aside.main-sidebar {
-                        -webkit-transform: translateX(0) !important;
-                        transform: translateX(0) !important;
-                        box-shadow: 14px 0 45px rgba(0, 0, 0, 0.9) !important;
+                        transform: translate3d(0, 0, 0) !important;
+                        -webkit-transform: translate3d(0, 0, 0) !important;
+                        box-shadow: 16px 0 50px rgba(0, 0, 0, 0.95) !important;
                     }
 
                     /* Prevent body scrolling when drawer is open */
@@ -954,14 +996,17 @@
         <div class="wrapper">
             <div id="sidebar-mobile-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 1055;"></div>
             <header class="main-header">
+                <!-- Hamburger on Far Left -->
+                <a href="javascript:void(0);" class="sidebar-toggle" id="adminSidebarToggle" role="button">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <!-- Brand / Logo -->
                 <a href="{{ route('index') }}" class="logo">
                     <span>{{ config('app.name', 'Pterodactyl') }}</span>
                 </a>
+                <!-- Right Side User Menu -->
                 <nav class="navbar navbar-static-top">
-                    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                        <span class="sr-only">Toggle navigation</span>
-                    </a>
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
                             <li class="user-menu">
@@ -970,12 +1015,8 @@
                                     <span class="hidden-xs">{{ Auth::user()->name_first }} {{ Auth::user()->name_last }}</span>
                                 </a>
                             </li>
-                            <li>
-                                <li><a href="{{ route('index') }}" data-toggle="tooltip" data-placement="bottom" title="Exit Admin Control"><i class="fa fa-server"></i></a></li>
-                            </li>
-                            <li>
-                                <li><a href="{{ route('auth.logout') }}" id="logoutButton" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fa fa-sign-out"></i></a></li>
-                            </li>
+                            <li><a href="{{ route('index') }}" data-toggle="tooltip" data-placement="bottom" title="Exit Admin Control"><i class="fa fa-server"></i></a></li>
+                            <li><a href="{{ route('auth.logout') }}" id="logoutButton" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fa fa-sign-out"></i></a></li>
                         </ul>
                     </div>
                 </nav>
@@ -1214,10 +1255,10 @@
                 });
             </script>
         
-                                    <script>
+                                                <script>
                 $(function () {
-                    // Fast Mobile & Desktop Sidebar Toggle Handler
-                    $(document).on('click', '.sidebar-toggle', function(e) {
+                    // Fast Mobile & Desktop Sidebar Toggle Handler (Zero Conflict)
+                    $(document).on('click', '#adminSidebarToggle', function(e) {
                         e.preventDefault();
                         e.stopPropagation();
                         if ($(window).width() < 768) {
